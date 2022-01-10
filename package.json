@@ -1,0 +1,32 @@
+{
+  "name": "linkding-injector",
+  "version": "1.0.0",
+  "description": "Injects search results from the linkding bookmark service into search pages like google and duckduckgo",
+  "license": "MIT",
+  "author": "Jakob Essbüchl",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/fivefold/linkding-injector.git"
+  },
+  "bugs": {
+    "url": "https://github.com/fivefold/linkding-injector/issues"
+  },
+  "homepage": "https://github.com/fivefold/linkding-injector#readme",
+  "scripts": {
+    "build": "rollup -c && sass scss/theme.scss styles/searchInjection.css",
+    "dev": "rollup -c -w && sass scss/theme.scss styles/searchInjection.css"
+  },
+  "dependencies": {
+    "@rollup/plugin-commonjs": "^17.0.0",
+    "@rollup/plugin-node-resolve": "^11.0.1",
+    "rollup": "^2.35.1",
+    "rollup-plugin-svelte": "^7.0.0",
+    "rollup-plugin-terser": "^7.0.2",
+    "spectre.css": "^0.5.9",
+    "svelte": "^3.31.0"
+  },
+  "devDependencies": {
+    "prettier": "^2.2.1",
+    "web-ext": "^6.1.0"
+  }
+}

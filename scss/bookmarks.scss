@@ -1,0 +1,23 @@
+ul#bookmark-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+
+  li {
+    margin-top: 0.4rem;
+  }
+
+  .description {
+    color: $gray-color;
+
+    .dark-bg &,
+    body[data-dt="1"] & {
+      color: $gray-color-dark;
+    }
+
+    a,
+    a:visited:hover {
+      color: $alternative-color;
+    }
+  }
+}
