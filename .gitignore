@@ -124,3 +124,4 @@ dist
 /build
 /web-ext-artifacts
 .web-extension-id
+/styles/searchInjection.*
