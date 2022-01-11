@@ -22,9 +22,9 @@ Once the extension is properly configured linkding search results will show in t
 
 ## Installation
 
-Firefox: [Mozilla Addon Store](https://addons.mozilla.org/de/firefox/addon/linkding-extension/)
+Firefox: [Mozilla Addon Store](https://addons.mozilla.org/en-US/firefox/addon/linkding-injector/)
 
-Chrome: [Chrome Web Store](https://chrome.google.com/webstore/detail/linkding-extension/beakmhbijpdhipnjhnclmhgjlddhidpe) 
+Chrome: ~~Chrome Web Store~~ (currently pending review)
 
 ## Manual installation
 
@@ -65,4 +65,4 @@ The packaged extension can be found in the `web-ext-artifacts` folder.
 
 ## Acknowledgments
 
-This extension resuses and adapts code from the [official linkding extension](https://github.com/sissbruecker/linkding-extension).
+This extension reuses and adapts code from the [official linkding extension](https://github.com/sissbruecker/linkding-extension).
