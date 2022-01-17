@@ -24,7 +24,7 @@ Once the extension is properly configured linkding search results will show in t
 
 Firefox: [Mozilla Addon Store](https://addons.mozilla.org/en-US/firefox/addon/linkding-injector/)
 
-Chrome: ~~Chrome Web Store~~ (currently pending review)
+Chrome: [Chrome Web Store](https://chrome.google.com/webstore/detail/linkding-injector/odjhldcomjlmfbdfeopdkeinpkmjibok)
 
 ## Manual installation
 
