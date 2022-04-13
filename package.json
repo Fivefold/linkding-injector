@@ -13,8 +13,8 @@
   },
   "homepage": "https://github.com/fivefold/linkding-injector#readme",
   "scripts": {
-    "build": "rollup -c && sass scss/theme.scss styles/searchInjection.css",
-    "dev": "rollup -c -w && sass scss/theme.scss styles/searchInjection.css"
+    "build": "rollup -c && sass scss/theme.scss build/searchInjection.css",
+    "dev": "rollup -c -w && sass scss/theme.scss build/searchInjection.css"
   },
   "dependencies": {
     "@rollup/plugin-commonjs": "^17.0.0",

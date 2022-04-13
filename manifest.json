@@ -20,7 +20,7 @@
   "content_scripts": [
     {
       "matches": ["*://duckduckgo.com/*"],
-      "css": ["styles/searchInjection.css"],
+      "css": ["build/searchInjection.css"],
       "js": ["build/searchInjection.js"]
     },
     {
@@ -216,7 +216,7 @@
         "*://*.google.co.zw/*",
         "*://*.google.cat/*"
       ],
-      "css": ["styles/searchInjection.css"],
+      "css": ["build/searchInjection.css"],
       "js": ["build/searchInjection.js"]
     }
   ],
