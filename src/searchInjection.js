@@ -104,6 +104,7 @@ port.onMessage.addListener(function (m) {
     html += `</ul></div>`;
   } else {
     console.error("linkding injector: no message and no search results");
+    return;
   }
 
   // querySelectors for finding the sidebar in the search engine websites
