@@ -27,6 +27,6 @@
   },
   "devDependencies": {
     "prettier": "^2.2.1",
-    "web-ext": "^6.1.0"
+    "web-ext": "^6.8.0"
   }
 }
