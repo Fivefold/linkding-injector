@@ -84,7 +84,7 @@ port.onMessage.addListener(function (m) {
           <div class="title">
             <a
               href="${bookmark.url}"
-              target="_blank"
+              target=${m.openLinkType == "sameTab" ? "_self" : "_blank"}
               rel="noopener"
               >${escapeHTML(bookmark.title)}</a
             >

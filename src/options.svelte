@@ -5,6 +5,7 @@
   let baseUrl = "";
   let token = "";
   let resultNum = 10;
+  let openLinkType = "newTab";
   let isSuccess = false;
   let isError = false;
 
@@ -13,6 +14,7 @@
     baseUrl = config.baseUrl;
     token = config.token;
     resultNum = config.resultNum;
+    openLinkType = config.openLinkType;
   }
 
   init();
@@ -21,7 +23,8 @@
     const config = {
       baseUrl,
       token,
-      resultNum
+      resultNum,
+      openLinkType
     };
 
     const testResult = await testConnection(config);
@@ -56,10 +59,21 @@
     </div>
   </div>
   <div class="form-group">
-    <label class="form-label" for="input-token">Maximum number of search results</label>
-    <input class="form-input" type="mi,ner" id="input-search-num" placeholder="10" bind:value={resultNum}>
+    <label class="form-label" for="input-search-num">Maximum number of search results</label>
+    <input class="form-input" type="number" id="input-search-num" placeholder="10" bind:value={resultNum}>
     <div class="form-input-hint">The maximum number of search results. High numbers could lead to worse performance.
     </div>
+  </div>
+  <div class="form-group">
+    <label class="form-label" for="input-link-type">Default open link type</label>
+    <label class="form-radio">
+      <input type="radio" id="input-link-type" bind:group={openLinkType} value="newTab">
+      <i class="form-icon"></i>Open links in a new tab (default)
+    </label>
+    <label class="form-radio">
+      <input type="radio" id="input-link-type" bind:group={openLinkType} value="sameTab">
+      <i class="form-icon"></i>Open links in the same tab
+    </label>
   </div>
   <div class="divider"></div>
   <div class="button-row">
