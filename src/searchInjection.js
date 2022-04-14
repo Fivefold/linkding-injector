@@ -27,6 +27,7 @@ if (document.location.hostname.match(/duckduckgo/)) {
 
 // When background script answers with results, construct html for the result box
 port.onMessage.addListener(function (m) {
+  const parser = new DOMParser();
   let sidebar, html;
   // In case we don't get results, but a message from the background script, 
   // display it. This is the case before proper configuration
@@ -49,6 +50,9 @@ port.onMessage.addListener(function (m) {
       </div>
     </div>
     `;
+
+    // Convert the above string into a DOM document
+    html = parser.parseFromString(html, "text/html");
   } 
   // If there is no message and there are actual results display them
   else if (m.results.length > 0) {
@@ -102,6 +106,9 @@ port.onMessage.addListener(function (m) {
         </li>`;
     });
     html += `</ul></div>`;
+    
+    // Convert the above string into a DOM document
+    html = parser.parseFromString(html, "text/html");
   } else {
     console.error("linkding injector: no message and no search results");
     return;
@@ -115,7 +122,7 @@ port.onMessage.addListener(function (m) {
   }
 
   // The actual injection
-  sidebar.insertAdjacentHTML("afterbegin", html);
+  sidebar.prepend(html.body.querySelector("div"));
 
   // Event listeners for opening the extension options. These can only be opened
   // by the background script, so we need to send a message to it
