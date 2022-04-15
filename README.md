@@ -63,6 +63,6 @@ After the build the root directory contains the complete, unpackaged extension. 
 
 The packaged extension can be found in the `web-ext-artifacts` folder.
 
-## Acknowledgments
+## Acknowledgements
 
 This extension reuses and adapts code from the [official linkding extension](https://github.com/sissbruecker/linkding-extension).

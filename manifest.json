@@ -3,7 +3,7 @@
   "name": "linkding injector",
   "version": "1.1.0",
   "description": "Injects search results from the linkding bookmark service into search pages like google and duckduckgo",
-  "homepage_url": "https://github.com/sissbruecker/linkding-extension/",
+  "homepage_url": "https://github.com/fivefold/linkding-injector.git",
 
   "icons": {
     "19": "icons/logo_19.png",
