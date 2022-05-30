@@ -23,6 +23,8 @@ if (document.location.hostname.match(/duckduckgo/)) {
   searchEngine = "duckduckgo";
 } else if (document.location.hostname.match(/google/)) {
   searchEngine = "google";
+} else if (document.location.hostname.match(/sear/)) {
+  searchEngine = "searx";
 }
 
 // When background script answers with results, construct html for the result box
@@ -119,6 +121,8 @@ port.onMessage.addListener(function (m) {
     sidebar = document.querySelector(".sidebar-modules");
   } else if (searchEngine == "google") {
     sidebar = document.querySelector("#rhs");
+  } else if (searchEngine == "searx") {
+    sidebar = document.querySelector("#sidebar");
   }
 
   // The actual injection
@@ -136,6 +140,10 @@ port.onMessage.addListener(function (m) {
 // Start the search by sending a message to background.js with the search term
 let queryString = location.search;
 let urlParams = new URLSearchParams(queryString);
+
 let searchTerm = urlParams.get("q");
+if (searchEngine == "searx") {
+  searchTerm = document.querySelector("#q").value
+}
 
 port.postMessage({ searchTerm: searchTerm });

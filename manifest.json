@@ -25,6 +25,15 @@
     },
     {
       "matches": [
+        "*://searx.tiekoetter.com/*",
+        "*://search.ononoki.org/*",
+        "*://searx.fmac.xyz/*"
+      ],
+      "css": ["build/searchInjection.css"],
+      "js": ["build/searchInjection.js"]
+    },
+    {
+      "matches": [
         "*://*.google.com/*",
         "*://*.google.ad/*",
         "*://*.google.ae/*",
