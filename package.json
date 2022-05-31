@@ -1,6 +1,6 @@
 {
   "name": "linkding-injector",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "description": "Injects search results from the linkding bookmark service into search pages like google and duckduckgo",
   "license": "MIT",
   "author": "Jakob Essbüchl",

@@ -1,3 +1,9 @@
+## v1.2.0 (31/05/2022)
+- [**feature**] New option: manual theme selection
+- [**feature**] Logo in injection box now links to linkding instance
+- [**bug**] Fix not injecting when there is no other sidebar content with google
+---
+
 ## v1.1.0 (14/04/2022)
 - [**feature**] New option: open links in new tab or the same tab
 - [**bug**] Fix injecting the string "undefined" when there are no results
