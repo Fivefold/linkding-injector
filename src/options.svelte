@@ -2,16 +2,14 @@
   import { getConfiguration, saveConfiguration } from "./configuration";
   import { testConnection } from "./linkding";
 
-  let baseUrl = "";
-  let token = "";
-  let resultNum = 10;
-  let openLinkType = "newTab";
-  let theme = {
-    duckduckgo: "auto",
-    google: "auto",
-  };
-  let isSuccess = false;
-  let isError = false;
+  let baseUrl;
+  let token;
+  let resultNum;
+  let openLinkType;
+  let themeDuckduckgo;
+  let themeGoogle;
+  let isSuccess;
+  let isError;
 
   function init() {
     const config = getConfiguration();
@@ -19,7 +17,8 @@
     token = config.token;
     resultNum = config.resultNum;
     openLinkType = config.openLinkType;
-    theme = config.theme;
+    themeDuckduckgo = config.themeDuckduckgo;
+    themeGoogle = config.themeGoogle;
   }
 
   init();
@@ -30,7 +29,8 @@
       token,
       resultNum,
       openLinkType,
-      theme,
+      themeDuckduckgo,
+      themeGoogle,
     };
 
     const testResult = await testConnection(config);
@@ -99,28 +99,81 @@
       performance.
     </div>
   </div>
-  <div class="form-group">
-    <label class="form-label" for="input-link-type"
-      >Default open link type
+  <div class="accordion">
+    <input type="checkbox" id="accordion-1" name="accordion-checkbox" hidden />
+    <label class="accordion-header" for="accordion-1">
+      <i class="icon icon-arrow-right mr-1" />
+      Advanced Settings
     </label>
-    <label class="form-radio">
-      <input
-        type="radio"
-        id="input-link-type"
-        bind:group={openLinkType}
-        value="newTab"
-      />
-      <i class="form-icon" />Open links in a new tab (default)
-    </label>
-    <label class="form-radio">
-      <input
-        type="radio"
-        id="input-link-type"
-        bind:group={openLinkType}
-        value="sameTab"
-      />
-      <i class="form-icon" />Open links in the same tab
-    </label>
+    <div class="accordion-body">
+      <div class="form-group">
+        <div class="form-label">Default open link type</div>
+        <label class="form-radio">
+          <input
+            type="radio"
+            id="input-link-type"
+            bind:group={openLinkType}
+            value="newTab"
+          />
+          <i class="form-icon" />Open links in a new tab (default)
+        </label>
+        <label class="form-radio">
+          <input
+            type="radio"
+            id="input-link-type"
+            bind:group={openLinkType}
+            value="sameTab"
+          />
+          <i class="form-icon" />Open links in the same tab
+        </label>
+      </div>
+      <div class="form-group p-relative clearfix">
+        <div class="form-label">Theme of injection box</div>
+        <div class="form-label float-left">google</div>
+        <label class="form-radio form-inline float-right">
+          <input
+            type="radio"
+            id="google-light"
+            bind:group={themeGoogle}
+            value="light"
+          />
+          <i class="form-icon" />light
+        </label>
+        <label class="form-radio form-inline float-right">
+          <input
+            type="radio"
+            id="google-dark"
+            bind:group={themeGoogle}
+            value="dark"
+          />
+          <i class="form-icon" />dark
+        </label>
+        <label class="form-radio form-inline float-right">
+          <input
+            type="radio"
+            id="google-auto"
+            bind:group={themeGoogle}
+            value="auto"
+          />
+          <i class="form-icon" />auto (default)
+        </label>
+      </div>
+      <div class="form-group p-relative clearfix">
+        <div class="form-label float-left">DuckDuckGo</div>
+        <label class="form-radio form-inline float-right">
+          <input type="radio" bind:group={themeDuckduckgo} value="light" />
+          <i class="form-icon" />light
+        </label>
+        <label class="form-radio form-inline float-right">
+          <input type="radio" bind:group={themeDuckduckgo} value="dark" />
+          <i class="form-icon" />dark
+        </label>
+        <label class="form-radio form-inline float-right">
+          <input type="radio" bind:group={themeDuckduckgo} value="auto" />
+          <i class="form-icon" />auto (default)
+        </label>
+      </div>
+    </div>
   </div>
 
   <div class="divider" />

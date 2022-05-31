@@ -28,11 +28,13 @@ if (document.location.hostname.match(/duckduckgo/)) {
 // When background script answers with results, construct html for the result box
 port.onMessage.addListener(function (m) {
   const parser = new DOMParser();
-  let sidebar, html;
-  // In case we don't get results, but a message from the background script, 
+  let theme, themeClass;
+  let htmlString = "";
+
+  // In case we don't get results, but a message from the background script,
   // display it. This is the case before proper configuration
   if ("message" in m) {
-    html = `
+    htmlString = `
     <div id="bookmark-list-container" class="${searchEngine}">
       <div id="navbar">
         <a id="ld-logo">  
@@ -52,12 +54,29 @@ port.onMessage.addListener(function (m) {
     `;
 
     // Convert the above string into a DOM document
-    html = parser.parseFromString(html, "text/html");
-  } 
+    htmlString = parser.parseFromString(htmlString, "text/html");
+  }
   // If there is no message and there are actual results display them
   else if (m.results.length > 0) {
-    html = `
-    <div id="bookmark-list-container" class="${searchEngine}">
+    // If the theme for a search engine is not set to auto, we need to add
+    // specific CSS classes
+    // Get the theme configuration
+    switch (searchEngine) {
+      case "duckduckgo":
+        theme = m.config.themeDuckduckgo;
+        break;
+      case "google":
+        theme = m.config.themeGoogle;
+        break;
+    }
+    if (theme == "auto") {
+      themeClass = ""; // automatic theme detection
+    } else {
+      themeClass = theme; // "dark" for dark theme, "light" for light theme
+    }
+
+    htmlString += `
+    <div id="bookmark-list-container" class="${searchEngine} ${themeClass}">
       <div id="navbar">
         <a id="ld-logo">  
           <img src=${browser.runtime.getURL("icons/logo.svg")} />
@@ -65,8 +84,8 @@ port.onMessage.addListener(function (m) {
         </a>
         <div id="results_amount">
           Found <span>${m.results.length}</span> ${
-              m.results.length == 1 ? "result" : "results"
-            }.
+      m.results.length == 1 ? "result" : "results"
+    }.
         </div>
         <a id="ld-options" class="openOptions">
           <img class="ld-settings" src=${browser.runtime.getURL(
@@ -76,24 +95,26 @@ port.onMessage.addListener(function (m) {
       </div>
     `;
 
-    html += `<ul id="bookmark-list">`;
+    htmlString += `<ul id="bookmark-list">`;
 
     m.results.forEach((bookmark) => {
-      html += `
+      htmlString += `
         <li>
           <div class="title">
             <a
               href="${bookmark.url}"
-              target=${m.openLinkType == "sameTab" ? "_self" : "_blank"}
+              target=${m.config.openLinkType == "sameTab" ? "_self" : "_blank"}
               rel="noopener"
               >${escapeHTML(bookmark.title)}</a
             >
           </div>
-          <div class="description">
+          <div class="description ${themeClass}">
             <span class="tags">
-              ${bookmark.tags.map((tag) => {
+              ${bookmark.tags
+                .map((tag) => {
                   return "<a>#" + escapeHTML(tag) + "</a>";
-                }).join(" ")}
+                })
+                .join(" ")}
               </a>
             </span>
     
@@ -105,22 +126,38 @@ port.onMessage.addListener(function (m) {
           </div>
         </li>`;
     });
-    html += `</ul></div>`;
-    
-    // Convert the above string into a DOM document
-    html = parser.parseFromString(html, "text/html");
+    htmlString += `</ul></div>`;
   } else {
     console.error("linkding injector: no message and no search results");
     return;
   }
+
+  let sidebar; // DOM document for the sidebar
 
   // querySelectors for finding the sidebar in the search engine websites
   if (searchEngine == "duckduckgo") {
     sidebar = document.querySelector(".sidebar-modules");
   } else if (searchEngine == "google") {
     sidebar = document.querySelector("#rhs");
+    if (sidebar == null) {
+      // google completely omits the sidebar container if there is no content.
+      // we need to add it manually before injection
+      let sidebarContainerString = `
+        <div id="rhs" class="TQc1id hSOk2e rhstc4"></div>`;
+
+      // construct DOM document from string
+      let sidebarContainer = parser.parseFromString(
+        sidebarContainerString,
+        "text/html"
+      );
+      let container = document.querySelector("#rcnt"); // get main search result container
+      container.appendChild(sidebarContainer.body.querySelector("div"));
+      sidebar = document.querySelector("#rhs"); // get the added sidebar container
+    }
   }
 
+  // Convert the html string into a DOM document
+  let html = parser.parseFromString(htmlString, "text/html");
   // The actual injection
   sidebar.prepend(html.body.querySelector("div"));
 

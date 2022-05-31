@@ -36,7 +36,10 @@ function connected(p) {
             tags: bookmark.tag_names,
             date: bookmark.date_modified,
           }));
-          portFromCS.postMessage({ results: bookmarkSuggestions, openLinkType: config.openLinkType });
+          portFromCS.postMessage({
+            results: bookmarkSuggestions,
+            config: config,
+          });
         })
         .catch((error) => {
           console.error(error);

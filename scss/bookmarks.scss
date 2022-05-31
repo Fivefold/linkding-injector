@@ -10,8 +10,9 @@ ul#bookmark-list {
   .description {
     color: $gray-color;
 
-    .dark-bg &,
-    body[data-dt="1"] & {
+    &.dark,
+    .dark-bg &:not(.light),
+    body[data-dt="1"] &:not(.light) {
       color: $gray-color-dark;
     }
 

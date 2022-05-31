@@ -4,7 +4,14 @@ export function getConfiguration() {
   const configJson = localStorage.getItem(CONFIG_KEY);
   const config = configJson
     ? JSON.parse(configJson)
-    : { baseUrl: "", token: "", resultNum: 10, openLinkType: "newTab" };
+    : {
+        baseUrl: "",
+        token: "",
+        resultNum: 10,
+        openLinkType: "newTab",
+        themeGoogle: "auto",
+        themeDuckduckgo: "auto",
+      };
   return config;
 }
 
