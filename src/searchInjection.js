@@ -30,6 +30,7 @@ port.onMessage.addListener(function (m) {
   const parser = new DOMParser();
   let theme, themeClass;
   let htmlString = "";
+  let html;
 
   // In case we don't get results, but a message from the background script,
   // display it. This is the case before proper configuration
@@ -54,7 +55,7 @@ port.onMessage.addListener(function (m) {
     `;
 
     // Convert the above string into a DOM document
-    htmlString = parser.parseFromString(htmlString, "text/html");
+    html = parser.parseFromString(htmlString, "text/html");
   }
   // If there is no message and there are actual results display them
   else if (m.results.length > 0) {
@@ -162,7 +163,7 @@ port.onMessage.addListener(function (m) {
   }
 
   // Convert the html string into a DOM document
-  let html = parser.parseFromString(htmlString, "text/html");
+  html = parser.parseFromString(htmlString, "text/html");
   // The actual injection
   sidebar.prepend(html.body.querySelector("div"));
 
