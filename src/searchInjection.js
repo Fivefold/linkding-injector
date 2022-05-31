@@ -75,10 +75,15 @@ port.onMessage.addListener(function (m) {
       themeClass = theme; // "dark" for dark theme, "light" for light theme
     }
 
+    // URL of the configured linkding instance (including search term)
+    let linkdingUrl =
+      m.config.baseUrl +
+      (searchTerm.length > 0 ? `/bookmarks?q=${searchTerm}` : "/");
+
     htmlString += `
     <div id="bookmark-list-container" class="${searchEngine} ${themeClass}">
       <div id="navbar">
-        <a id="ld-logo">  
+        <a id="ld-logo" href="${linkdingUrl}">  
           <img src=${browser.runtime.getURL("icons/logo.svg")} />
           <h1>linkding injector</h1>
         </a>
