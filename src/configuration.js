@@ -1,7 +1,13 @@
+import { isChrome, getBrowser } from "./browser";
+
 const CONFIG_KEY = "ld_ext_config";
 
-export function getConfiguration() {
-  const configJson = localStorage.getItem(CONFIG_KEY);
+export async function getConfiguration() {
+  const configPromise = isChrome()
+    ? new Promise((resolve) => getBrowser().storage.local.get(CONFIG_KEY, resolve))
+    : getBrowser().storage.local.get(CONFIG_KEY);
+  const promiseResult = await configPromise;
+  const configJson = promiseResult && promiseResult[CONFIG_KEY];
   const config = configJson
     ? JSON.parse(configJson)
     : {
@@ -17,11 +23,11 @@ export function getConfiguration() {
 
 export function saveConfiguration(config) {
   const configJson = JSON.stringify(config);
-  localStorage.setItem(CONFIG_KEY, configJson);
+  getBrowser().storage.local.set({ [CONFIG_KEY]: configJson });
 }
 
-export function isConfigurationComplete() {
-  const config = getConfiguration();
+export async function isConfigurationComplete() {
+  const config = await getConfiguration();
 
   return config.baseUrl && config.token;
 }

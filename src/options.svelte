@@ -11,8 +11,8 @@
   let isSuccess;
   let isError;
 
-  function init() {
-    const config = getConfiguration();
+  async function init() {
+    const config = await getConfiguration();
     baseUrl = config.baseUrl;
     token = config.token;
     resultNum = config.resultNum;
