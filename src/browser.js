@@ -1,4 +1,4 @@
-function isChrome() {
+export function isChrome() {
   return typeof chrome !== "undefined";
 }
 

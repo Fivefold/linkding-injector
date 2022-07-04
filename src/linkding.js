@@ -1,7 +1,7 @@
 import { getConfiguration } from "./configuration";
 
 export async function getTags() {
-  const configuration = getConfiguration();
+  const configuration = await getConfiguration();
 
   return fetch(`${configuration.baseUrl}/api/tags/?limit=1000`, {
     headers: {
@@ -16,7 +16,7 @@ export async function getTags() {
 }
 
 export async function search(text, options) {
-  const configuration = getConfiguration();
+  const configuration = await getConfiguration();
   const q = encodeURIComponent(text);
   const limit = options.limit || 100;
 
