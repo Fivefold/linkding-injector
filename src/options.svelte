@@ -1,6 +1,6 @@
 <script>
   import { getConfiguration, saveConfiguration } from "./configuration";
-  import { testConnection } from "./linkding";
+  import { LinkdingApi } from "./linkding";
 
   let baseUrl;
   let token;
@@ -11,8 +11,8 @@
   let isSuccess;
   let isError;
 
-  function init() {
-    const config = getConfiguration();
+  async function init() {
+    const config = await getConfiguration();
     baseUrl = config.baseUrl;
     token = config.token;
     resultNum = config.resultNum;
@@ -33,10 +33,10 @@
       themeGoogle,
     };
 
-    const testResult = await testConnection(config);
+    const testResult = await new LinkdingApi(config).testConnection(config);
 
     if (testResult) {
-      saveConfiguration(config);
+      await saveConfiguration(config);
       isError = false;
       isSuccess = true;
     } else {
@@ -56,7 +56,9 @@
 </p>
 <form class="form" on:submit|preventDefault={handleSubmit}>
   <div class="form-group">
-    <label class="form-label" for="input-base-url">Base URL</label>
+    <label class="form-label" for="input-base-url"
+      >Base URL <span class="text-error">*</span></label
+    >
     <input
       class="form-input"
       type="text"
@@ -70,7 +72,9 @@
     </div>
   </div>
   <div class="form-group">
-    <label class="form-label" for="input-token">API Authentication Token</label>
+    <label class="form-label" for="input-token"
+      >API Authentication Token <span class="text-error">*</span></label
+    >
     <input
       class="form-input"
       type="password"

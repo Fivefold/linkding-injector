@@ -227,5 +227,5 @@
 
   "web_accessible_resources": ["icons/*.png", "icons/*.svg"],
 
-  "permissions": ["https://*/*", "http://*/*"]
+  "permissions": ["https://*/*", "http://*/*", "storage"]
 }

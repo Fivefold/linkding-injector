@@ -1,27 +1,43 @@
+import { getBrowser, getStorage, isChrome } from "./browser";
+
 const CONFIG_KEY = "ld_ext_config";
 
-export function getConfiguration() {
-  const configJson = localStorage.getItem(CONFIG_KEY);
-  const config = configJson
-    ? JSON.parse(configJson)
-    : {
-        baseUrl: "",
-        token: "",
-        resultNum: 10,
-        openLinkType: "newTab",
-        themeGoogle: "auto",
-        themeDuckduckgo: "auto",
-      };
+export async function getConfiguration() {
+  let config = "";
+
+  const configJson = await getStorage().get(CONFIG_KEY);
+
+  if (
+    // if there is no saved configuration, save a default configuration
+    configJson &&
+    Object.keys(configJson).length === 0 &&
+    Object.getPrototypeOf(configJson) === Object.prototype
+  ) {
+    config = {
+      baseUrl: "",
+      token: "",
+      resultNum: 10,
+      openLinkType: "newTab",
+      themeGoogle: "auto",
+      themeDuckduckgo: "auto",
+    };
+  } else {
+    config = JSON.parse(configJson[CONFIG_KEY]);
+  }
   return config;
 }
 
 export function saveConfiguration(config) {
   const configJson = JSON.stringify(config);
-  localStorage.setItem(CONFIG_KEY, configJson);
+  getStorage().set({ [CONFIG_KEY]: configJson });
 }
 
-export function isConfigurationComplete() {
-  const config = getConfiguration();
+export async function isConfigurationComplete() {
+  const config = await getConfiguration();
 
-  return config.baseUrl && config.token;
+  if (config.baseUrl === "" || config.token === "") {
+    return false;
+  } else {
+    return true;
+  }
 }

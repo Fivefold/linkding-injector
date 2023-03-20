@@ -39,8 +39,8 @@ Run the build as described below and then follow the instructions [here](https:/
 ## Build
 
 **Requirements**
-- Latest LTS Node version (v14)
-- Latest LTS NPM version (v6)
+- Latest LTS Node version (v14+)
+- Latest LTS NPM version (v6+)
 - bash (on Linux) or powershell (on Windows)
 - npx (included with npm v5.2+)
 
