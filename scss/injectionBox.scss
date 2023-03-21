@@ -42,7 +42,7 @@ div#bookmark-list-container {
     #navbar #ld-logo {
       flex: 1;
       
-      img {
+      img:not(.setup) {
         width: 35%;
       }
     }
@@ -55,7 +55,9 @@ div#bookmark-list-container {
     }
   }
 
-  
+  &.searx { // searx-specific styles
+    box-shadow: none;
+  }
 
   .tags a:hover {
     text-decoration: none;
@@ -123,7 +125,7 @@ div#bookmark-list-container {
     }
     
     
-    body[data-dt="1"] &:not(.light) {
+    &.google:not(.light) {
       background-color: $google-bg;
       border: 1px solid $google-border-color-dark;
     }
@@ -131,12 +133,18 @@ div#bookmark-list-container {
     &.brave:not(.light) {
       background-color: $brave-bg;
     }
+
+    &.searx:not(.light) {
+      background-color: $searx-bg-dark;
+      border: 1px solid $searx-border-color-dark;
+    }
   }
 
   /**
   .dark-bg is the class duckduckgo globally uses for the dark theme
   data-dt=1 is the attribute of the body tag google uses for the dark theme
   .dark is the class brave search globally uses for the dark theme
+  .theme-dark is the class searx globally uses for the dark theme
   
   .light is added if the manual white theme is set and disables these dark 
   styles, while .dark activates them regardless of global theme.
@@ -144,12 +152,13 @@ div#bookmark-list-container {
   &.dark,
   .dark-bg &:not(.light),             // DuckDuckGo
   body[data-dt="1"] &:not(.light),    // Google
-  html.dark &:not(.light) {           // Brave Search
-    @include dark-styling;
-
+  html.dark &:not(.light),            // Brave Search
+  html.theme-dark &:not(.light) {     // Searx
     @media (prefers-color-scheme: dark) {
       @include dark-styling;
     }
+    
+    @include dark-styling;
   }
   // --------- dark styling end ---------
 

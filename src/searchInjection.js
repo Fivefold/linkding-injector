@@ -25,6 +25,8 @@ if (document.location.hostname.match(/duckduckgo/)) {
   searchEngine = "google";
 } else if (document.location.hostname.match(/search.brave.com/)) {
   searchEngine = "brave";
+} else if (document.location.href.match(/http.?:\/\/.+\/search/)) {
+  searchEngine = "searx";
 }
 
 // When background script answers with results, construct html for the result box
@@ -41,7 +43,7 @@ port.onMessage.addListener(function (m) {
     <div id="bookmark-list-container" class="${searchEngine}">
       <div id="navbar">
         <a id="ld-logo">  
-          <img src=${browser.runtime.getURL("icons/logo.svg")} />
+          <img src=${browser.runtime.getURL("icons/logo.svg")} class="setup" />
           <h1>linkding injector</h1>
         </a>
         <a id="ld-options" class="openOptions">
@@ -73,6 +75,9 @@ port.onMessage.addListener(function (m) {
         break;
       case "brave":
         theme = m.config.themeBrave;
+        break;
+      case "searx":
+        theme = m.config.themeSearx;
         break;
     }
     if (theme == "auto") {
@@ -167,12 +172,16 @@ port.onMessage.addListener(function (m) {
     }
   } else if (searchEngine == "brave") {
     sidebar = document.querySelector("#side-right");
+  } else if (searchEngine == "searx") {
+    sidebar = document.querySelector("#sidebar");
   }
 
   // Convert the html string into a DOM document
   html = parser.parseFromString(htmlString, "text/html");
   // The actual injection
-  sidebar.prepend(html.body.querySelector("div"));
+  if (document.querySelector("#bookmark-list-container") == null) {
+    sidebar.prepend(html.body.querySelector("div"));
+  }
 
   // Event listeners for opening the extension options. These can only be opened
   // by the background script, so we need to send a message to it
@@ -187,5 +196,8 @@ port.onMessage.addListener(function (m) {
 let queryString = location.search;
 let urlParams = new URLSearchParams(queryString);
 let searchTerm = urlParams.get("q");
+if (searchEngine == "searx") {
+  searchTerm = document.querySelector("input#q").value;
+}
 
 port.postMessage({ searchTerm: searchTerm });
