@@ -29,7 +29,7 @@
       "js": ["build/searchInjection.js"]
     },
     {
-      "matches": ["*://*/search?*"],
+      "matches": ["*://*/search?*", "*://*/search"],
       "css": ["build/searchInjection.css"],
       "js": ["build/searchInjection.js"]
     },
