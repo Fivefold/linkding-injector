@@ -1,3 +1,10 @@
+## v1.3.0 (21/03/2023)
+- [**feature**] New search engine: SearX/SearXNG
+- [**feature**] New search engine: Brave Search
+- [**enhancement**] New logo
+- [**enhancement**] manifest v3 support (in chrome)
+---
+
 ## v1.2.0 (31/05/2022)
 - [**feature**] New option: manual theme selection
 - [**feature**] Logo in injection box now links to linkding instance
