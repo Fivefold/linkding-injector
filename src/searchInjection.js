@@ -23,6 +23,8 @@ if (document.location.hostname.match(/duckduckgo/)) {
   searchEngine = "duckduckgo";
 } else if (document.location.hostname.match(/google/)) {
   searchEngine = "google";
+} else if (document.location.hostname.match(/search.brave.com/)) {
+  searchEngine = "brave";
 }
 
 // When background script answers with results, construct html for the result box
@@ -68,6 +70,9 @@ port.onMessage.addListener(function (m) {
         break;
       case "google":
         theme = m.config.themeGoogle;
+        break;
+      case "brave":
+        theme = m.config.themeBrave;
         break;
     }
     if (theme == "auto") {
@@ -160,6 +165,8 @@ port.onMessage.addListener(function (m) {
       container.appendChild(sidebarContainer.body.querySelector("div"));
       sidebar = document.querySelector("#rhs"); // get the added sidebar container
     }
+  } else if (searchEngine == "brave") {
+    sidebar = document.querySelector("#side-right");
   }
 
   // Convert the html string into a DOM document

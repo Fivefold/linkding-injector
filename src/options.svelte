@@ -8,6 +8,7 @@
   let openLinkType;
   let themeDuckduckgo;
   let themeGoogle;
+  let themeBrave;
   let isSuccess;
   let isError;
 
@@ -19,6 +20,7 @@
     openLinkType = config.openLinkType;
     themeDuckduckgo = config.themeDuckduckgo;
     themeGoogle = config.themeGoogle;
+    themeBrave = config.themeBrave;
   }
 
   init();
@@ -31,6 +33,7 @@
       openLinkType,
       themeDuckduckgo,
       themeGoogle,
+      themeBrave,
     };
 
     const testResult = await new LinkdingApi(config).testConnection(config);
@@ -174,6 +177,21 @@
         </label>
         <label class="form-radio form-inline float-right">
           <input type="radio" bind:group={themeDuckduckgo} value="auto" />
+          <i class="form-icon" />auto (default)
+        </label>
+      </div>
+      <div class="form-group p-relative clearfix">
+        <div class="form-label float-left">Brave Search</div>
+        <label class="form-radio form-inline float-right">
+          <input type="radio" bind:group={themeBrave} value="light" />
+          <i class="form-icon" />light
+        </label>
+        <label class="form-radio form-inline float-right">
+          <input type="radio" bind:group={themeBrave} value="dark" />
+          <i class="form-icon" />dark
+        </label>
+        <label class="form-radio form-inline float-right">
+          <input type="radio" bind:group={themeBrave} value="auto" />
           <i class="form-icon" />auto (default)
         </label>
       </div>

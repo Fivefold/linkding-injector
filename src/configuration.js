@@ -1,4 +1,4 @@
-import { getBrowser, getStorage, isChrome } from "./browser";
+import { getStorage } from "./browser";
 
 const CONFIG_KEY = "ld_ext_config";
 
@@ -20,6 +20,7 @@ export async function getConfiguration() {
       openLinkType: "newTab",
       themeGoogle: "auto",
       themeDuckduckgo: "auto",
+      themeBrave: "auto",
     };
   } else {
     config = JSON.parse(configJson[CONFIG_KEY]);
