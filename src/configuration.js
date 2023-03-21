@@ -21,6 +21,7 @@ export async function getConfiguration() {
       themeGoogle: "auto",
       themeDuckduckgo: "auto",
       themeBrave: "auto",
+      themeSearx: "auto",
     };
   } else {
     config = JSON.parse(configJson[CONFIG_KEY]);
