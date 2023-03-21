@@ -8,6 +8,8 @@
   let openLinkType;
   let themeDuckduckgo;
   let themeGoogle;
+  let themeBrave;
+  let themeSearx;
   let isSuccess;
   let isError;
 
@@ -19,6 +21,8 @@
     openLinkType = config.openLinkType;
     themeDuckduckgo = config.themeDuckduckgo;
     themeGoogle = config.themeGoogle;
+    themeBrave = config.themeBrave;
+    themeSearx = config.themeSearx;
   }
 
   init();
@@ -31,6 +35,8 @@
       openLinkType,
       themeDuckduckgo,
       themeGoogle,
+      themeBrave,
+      themeSearx,
     };
 
     const testResult = await new LinkdingApi(config).testConnection(config);
@@ -176,6 +182,40 @@
           <input type="radio" bind:group={themeDuckduckgo} value="auto" />
           <i class="form-icon" />auto (default)
         </label>
+      </div>
+      <div class="form-group p-relative clearfix">
+        <div class="form-label float-left">Brave Search†</div>
+        <label class="form-radio form-inline float-right">
+          <input type="radio" bind:group={themeBrave} value="light" />
+          <i class="form-icon" />light
+        </label>
+        <label class="form-radio form-inline float-right">
+          <input type="radio" bind:group={themeBrave} value="dark" />
+          <i class="form-icon" />dark
+        </label>
+        <label class="form-radio form-inline float-right">
+          <input type="radio" bind:group={themeBrave} value="auto" />
+          <i class="form-icon" />auto (default)
+        </label>
+      </div>
+      <div class="form-group p-relative clearfix">
+        <div class="form-label float-left">SearX/SearXNG†</div>
+        <label class="form-radio form-inline float-right">
+          <input type="radio" bind:group={themeSearx} value="light" />
+          <i class="form-icon" />light
+        </label>
+        <label class="form-radio form-inline float-right">
+          <input type="radio" bind:group={themeSearx} value="dark" />
+          <i class="form-icon" />dark
+        </label>
+        <label class="form-radio form-inline float-right">
+          <input type="radio" bind:group={themeSearx} value="auto" />
+          <i class="form-icon" />auto (default)
+        </label>
+      </div>
+      <div class="form-input-hint">
+        † Automatic theme detection may fail with these search engines unless
+        you set a specific theme (not 'system') in the search engine settings.
       </div>
     </div>
   </div>

@@ -9,39 +9,16 @@ div#bookmark-list-container {
   box-shadow: 0 2px 3px rgba(0, 0, 0, 0.06);
   border: 1px solid $duckduckgo-border-color;
 
-  /**
-  .dark-bg is the class duckduckgo globally uses for the dark theme
-  data-dt=1 is the attribute of the body tag google uses for the dark theme
+  a {
+    color: $primary-color;
+
+    :hover {
+      color: $link-color-dark;
+      cursor: pointer;
+    }
+  }
   
-  .light is added if the manual white theme is set and disables these dark 
-  styles, while .dark activates them regardless of global theme.
-  */
-  &.dark,
-  .dark-bg &:not(.light),
-  body[data-dt="1"] &:not(.light) {
-    background-color: $duckduckgo-bg;
-    border: none;
-    color: $primary-color-dark;
-
-    a {
-      color: $primary-color-dark;
-    }
-
-    #navbar #results_amount span {
-      color: $alternative-color !important;
-    }
-
-    .tags a {
-      color: $alternative-color;
-    }
-  }
-  body[data-dt="1"] &:not(.light) {
-    background-color: $google-bg;
-    border: 1px solid $google-border-color-dark;
-  }
-  // dark styling end
-
-  &.google {
+  &.google { // google-specific styles
     width: 369px;
     box-sizing: border-box;
     box-shadow: none;
@@ -55,12 +32,31 @@ div#bookmark-list-container {
     }
   }
 
-  a {
-    color: $primary-color;
-    :hover {
-      color: $link-color-dark;
-      cursor: pointer;
+  &.brave { // brave-specific styles
+    box-shadow: none;
+    border: none;
+    border-radius: 12px;
+    font-size: 0.655rem;
+    
+
+    #navbar #ld-logo {
+      flex: 1;
+      
+      img:not(.setup) {
+        width: 35%;
+      }
     }
+
+    h1 {
+        font-size: 0.8em !important;
+    }
+    #results_amount {
+      flex: 1;
+    }
+  }
+
+  &.searx { // searx-specific styles
+    box-shadow: none;
   }
 
   .tags a:hover {
@@ -109,4 +105,61 @@ div#bookmark-list-container {
       }
     }
   }
+
+  // --------- dark styling start ---------
+  @mixin dark-styling {
+    background-color: $duckduckgo-bg;
+    border: none;
+    color: $primary-color-dark;
+    
+    a {
+      color: $primary-color-dark;
+    }
+    
+    #navbar #results_amount span {
+      color: $alternative-color !important;
+    }
+    
+    .tags a {
+      color: $alternative-color;
+    }
+    
+    
+    &.google:not(.light) {
+      background-color: $google-bg;
+      border: 1px solid $google-border-color-dark;
+    }
+
+    &.brave:not(.light) {
+      background-color: $brave-bg;
+    }
+
+    &.searx:not(.light) {
+      background-color: $searx-bg-dark;
+      border: 1px solid $searx-border-color-dark;
+    }
+  }
+
+  /**
+  .dark-bg is the class duckduckgo globally uses for the dark theme
+  data-dt=1 is the attribute of the body tag google uses for the dark theme
+  .dark is the class brave search globally uses for the dark theme
+  .theme-dark is the class searx globally uses for the dark theme
+  
+  .light is added if the manual white theme is set and disables these dark 
+  styles, while .dark activates them regardless of global theme.
+  */
+  &.dark,
+  .dark-bg &:not(.light),             // DuckDuckGo
+  body[data-dt="1"] &:not(.light),    // Google
+  html.dark &:not(.light),            // Brave Search
+  html.theme-dark &:not(.light) {     // Searx
+    @media (prefers-color-scheme: dark) {
+      @include dark-styling;
+    }
+    
+    @include dark-styling;
+  }
+  // --------- dark styling end ---------
+
 }

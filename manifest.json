@@ -24,6 +24,16 @@
       "js": ["build/searchInjection.js"]
     },
     {
+      "matches": ["*://search.brave.com/*"],
+      "css": ["build/searchInjection.css"],
+      "js": ["build/searchInjection.js"]
+    },
+    {
+      "matches": ["*://*/search?*"],
+      "css": ["build/searchInjection.css"],
+      "js": ["build/searchInjection.js"]
+    },
+    {
       "matches": [
         "*://*.google.com/*",
         "*://*.google.ad/*",
