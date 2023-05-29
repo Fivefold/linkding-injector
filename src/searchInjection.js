@@ -17,22 +17,24 @@ function escapeHTML(str) {
 
 const browser = getBrowser();
 
-let port = browser.runtime.connect({ name: "port-from-cs" });
+const port = browser.runtime.connect({ name: "port-from-cs" });
 let searchEngine;
 if (document.location.hostname.match(/duckduckgo/)) {
   searchEngine = "duckduckgo";
 } else if (document.location.hostname.match(/google/)) {
   searchEngine = "google";
-} else if (document.location.hostname.match(/search.brave.com/)) {
+} else if (document.location.hostname.match(/search\.brave\.com/)) {
   searchEngine = "brave";
 } else if (document.location.href.match(/http.?:\/\/.+\/search/)) {
   searchEngine = "searx";
+} else {
+  console.debug("Linkding-Injector extension: no search engine found.");
 }
 
 // When background script answers with results, construct html for the result box
 port.onMessage.addListener(function (m) {
   const parser = new DOMParser();
-  let theme, themeClass;
+  let themeClass;
   let htmlString = "";
   let html;
 
@@ -66,20 +68,15 @@ port.onMessage.addListener(function (m) {
     // If the theme for a search engine is not set to auto, we need to add
     // specific CSS classes
     // Get the theme configuration
-    switch (searchEngine) {
-      case "duckduckgo":
-        theme = m.config.themeDuckduckgo;
-        break;
-      case "google":
-        theme = m.config.themeGoogle;
-        break;
-      case "brave":
-        theme = m.config.themeBrave;
-        break;
-      case "searx":
-        theme = m.config.themeSearx;
-        break;
-    }
+    const themes = {
+      duckduckgo: m.config.themeDuckduckgo,
+      google: m.config.themeGoogle,
+      brave: m.config.themeBrave,
+      searx: m.config.themeSearx,
+    };
+
+    const theme = themes[searchEngine];
+
     if (theme == "auto") {
       themeClass = ""; // automatic theme detection
     } else {
@@ -148,32 +145,29 @@ port.onMessage.addListener(function (m) {
     return;
   }
 
-  let sidebar; // DOM document for the sidebar
+  // Finding the sidebar
 
-  // querySelectors for finding the sidebar in the search engine websites
-  if (searchEngine == "duckduckgo") {
-    sidebar = document.querySelector(".sidebar-modules");
-  } else if (searchEngine == "google") {
+  const sidebarSelectors = {
+    duckduckgo: "section[data-area=sidebar]",
+    google: "#rhs",
+    brave: "#side-right",
+    searx: "#sidebar",
+  };
+  const sidebarSelector = sidebarSelectors[searchEngine];
+  let sidebar = document.querySelector(sidebarSelector);
+
+  // Google completely omits the sidebar container if there is no content.
+  // We need to add it manually before injection
+  if (searchEngine === "google" && sidebar === null) {
+    let sidebarContainerString = `
+    <div id="rhs" class="TQc1id hSOk2e rhstc4"></div>`;
+    let sidebarContainer = parser.parseFromString(
+      sidebarContainerString,
+      "text/html"
+    );
+    let container = document.querySelector("#rcnt");
+    container.appendChild(sidebarContainer.body.querySelector("div"));
     sidebar = document.querySelector("#rhs");
-    if (sidebar == null) {
-      // google completely omits the sidebar container if there is no content.
-      // we need to add it manually before injection
-      let sidebarContainerString = `
-        <div id="rhs" class="TQc1id hSOk2e rhstc4"></div>`;
-
-      // construct DOM document from string
-      let sidebarContainer = parser.parseFromString(
-        sidebarContainerString,
-        "text/html"
-      );
-      let container = document.querySelector("#rcnt"); // get main search result container
-      container.appendChild(sidebarContainer.body.querySelector("div"));
-      sidebar = document.querySelector("#rhs"); // get the added sidebar container
-    }
-  } else if (searchEngine == "brave") {
-    sidebar = document.querySelector("#side-right");
-  } else if (searchEngine == "searx") {
-    sidebar = document.querySelector("#sidebar");
   }
 
   // Convert the html string into a DOM document
@@ -193,11 +187,11 @@ port.onMessage.addListener(function (m) {
 });
 
 // Start the search by sending a message to background.js with the search term
-let queryString = location.search;
+let queryString = escapeHTML(location.search);
 let urlParams = new URLSearchParams(queryString);
 let searchTerm = urlParams.get("q");
 if (searchEngine == "searx") {
-  searchTerm = document.querySelector("input#q").value;
+  searchTerm = escapeHTML(document.querySelector("input#q").value);
 }
 
 port.postMessage({ searchTerm: searchTerm });
