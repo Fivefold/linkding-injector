@@ -36,6 +36,7 @@ port.onMessage.addListener(function (m) {
   const parser = new DOMParser();
   let themeClass;
   let htmlString = "";
+  let html;
 
   // In case we don't get results, but a message from the background script,
   // display it. This is the case before proper configuration
@@ -147,7 +148,7 @@ port.onMessage.addListener(function (m) {
   // Finding the sidebar
 
   const sidebarSelectors = {
-    duckduckgo: ".sidebar-modules",
+    duckduckgo: "section[data-area=sidebar]",
     google: "#rhs",
     brave: "#side-right",
     searx: "#sidebar",
@@ -170,7 +171,7 @@ port.onMessage.addListener(function (m) {
   }
 
   // Convert the html string into a DOM document
-  let html = parser.parseFromString(htmlString, "text/html");
+  html = parser.parseFromString(htmlString, "text/html");
   // The actual injection
   if (document.querySelector("#bookmark-list-container") == null) {
     sidebar.prepend(html.body.querySelector("div"));
