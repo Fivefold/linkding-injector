@@ -187,9 +187,9 @@ port.onMessage.addListener(function (m) {
 });
 
 // Start the search by sending a message to background.js with the search term
-let queryString = escapeHTML(location.search);
+let queryString = location.search;
 let urlParams = new URLSearchParams(queryString);
-let searchTerm = urlParams.get("q");
+let searchTerm = escapeHTML(urlParams.get("q"));
 if (searchEngine == "searx") {
   searchTerm = escapeHTML(document.querySelector("input#q").value);
 }
