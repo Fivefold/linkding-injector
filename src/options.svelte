@@ -184,7 +184,7 @@
         </label>
       </div>
       <div class="form-group p-relative clearfix">
-        <div class="form-label float-left">Brave Search†</div>
+        <div class="form-label float-left">Brave Search</div>
         <label class="form-radio form-inline float-right">
           <input type="radio" bind:group={themeBrave} value="light" />
           <i class="form-icon" />light
@@ -199,7 +199,7 @@
         </label>
       </div>
       <div class="form-group p-relative clearfix">
-        <div class="form-label float-left">SearX/SearXNG†</div>
+        <div class="form-label float-left">SearX/SearXNG</div>
         <label class="form-radio form-inline float-right">
           <input type="radio" bind:group={themeSearx} value="light" />
           <i class="form-icon" />light
@@ -212,10 +212,6 @@
           <input type="radio" bind:group={themeSearx} value="auto" />
           <i class="form-icon" />auto (default)
         </label>
-      </div>
-      <div class="form-input-hint">
-        † Automatic theme detection may fail with these search engines unless
-        you set a specific theme (not 'system') in the search engine settings.
       </div>
     </div>
   </div>
