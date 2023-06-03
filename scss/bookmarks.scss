@@ -13,7 +13,7 @@ ul#bookmark-list {
     &.dark,
     .dark-bg &:not(.light),
     body[data-dt="1"] &:not(.light),
-    html.dark &:not(.light),
+   :root:not(.light) &:not(.light),
     html.theme-dark &:not(.light) {
       color: $gray-color-dark;
     }
