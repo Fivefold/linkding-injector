@@ -17,8 +17,9 @@ div#bookmark-list-container {
       cursor: pointer;
     }
   }
-  
-  &.google { // google-specific styles
+
+  &.google {
+    // google-specific styles
     width: 369px;
     box-sizing: border-box;
     box-shadow: none;
@@ -32,30 +33,31 @@ div#bookmark-list-container {
     }
   }
 
-  &.brave { // brave-specific styles
+  &.brave {
+    // brave-specific styles
     box-shadow: none;
     border: none;
     border-radius: 12px;
     font-size: 0.655rem;
-    
 
     #navbar #ld-logo {
       flex: 1;
-      
+
       img:not(.setup) {
         width: 35%;
       }
     }
 
     h1 {
-        font-size: 0.8em !important;
+      font-size: 0.8em !important;
     }
     #results_amount {
       flex: 1;
     }
   }
 
-  &.searx { // searx-specific styles
+  &.searx {
+    // searx-specific styles
     box-shadow: none;
   }
 
@@ -111,20 +113,19 @@ div#bookmark-list-container {
     background-color: $duckduckgo-bg;
     border: none;
     color: $primary-color-dark;
-    
+
     a {
       color: $primary-color-dark;
     }
-    
+
     #navbar #results_amount span {
       color: $alternative-color !important;
     }
-    
+
     .tags a {
       color: $alternative-color;
     }
-    
-    
+
     &.google:not(.light) {
       background-color: $google-bg;
       border: 1px solid $google-border-color-dark;
@@ -149,17 +150,15 @@ div#bookmark-list-container {
   .light is added if the manual white theme is set and disables these dark 
   styles, while .dark activates them regardless of global theme.
   */
+  @media (prefers-color-scheme: dark) {
   &.dark,
   .dark-bg &:not(.light),             // DuckDuckGo
   body[data-dt="1"] &:not(.light),    // Google
-  :root:not(.light) &:not(.light),            // Brave Search
-  html.theme-dark &:not(.light) {     // Searx
-    @media (prefers-color-scheme: dark) {
+  :root:not(.light) &:not(.light),
+  html.theme-dark &:not(.light) {
+      // Searx {
       @include dark-styling;
     }
-    
-    @include dark-styling;
   }
   // --------- dark styling end ---------
-
 }
