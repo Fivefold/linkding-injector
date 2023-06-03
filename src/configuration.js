@@ -40,6 +40,6 @@ export async function isConfigurationComplete() {
   if (config.baseUrl === "" || config.token === "") {
     return false;
   } else {
-    return true;
+    return true
   }
 }
