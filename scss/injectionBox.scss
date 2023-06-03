@@ -153,9 +153,8 @@ div#bookmark-list-container {
   &.dark,
   .dark-bg &:not(.light),             // DuckDuckGo
   body[data-dt="1"] &:not(.light),    // Google
-  :root:not(.light) &:not(.light),  // Brave
-  html.theme-dark &:not(.light) {
-      // Searx {
+  :root:not(.light) &:not(.light),    // Brave
+  html.theme-dark &:not(.light) {     // Searx
       @include dark-styling;
     }
   }
