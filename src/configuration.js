@@ -2,18 +2,18 @@ import { getStorage } from "./browser";
 
 const CONFIG_KEY = "ld_ext_config";
 
-export async function getConfiguration() {
-  const DEFAULT_CONFIG = {
-    baseUrl: "",
-    token: "",
-    resultNum: 10,
-    openLinkType: "newTab",
-    themeGoogle: "auto",
-    themeDuckduckgo: "auto",
-    themeBrave: "auto",
-    themeSearx: "auto",
-  };
+const DEFAULT_CONFIG = {
+  baseUrl: "",
+  token: "",
+  resultNum: 10,
+  openLinkType: "newTab",
+  themeGoogle: "auto",
+  themeDuckduckgo: "auto",
+  themeBrave: "auto",
+  themeSearx: "auto",
+};
 
+export async function getConfiguration() {
   return new Promise((resolve) => {
     getStorage().get(CONFIG_KEY, (data) => {
       const config = JSON.parse(data[CONFIG_KEY] || DEFAULT_CONFIG);
