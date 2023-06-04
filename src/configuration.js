@@ -2,32 +2,25 @@ import { getStorage } from "./browser";
 
 const CONFIG_KEY = "ld_ext_config";
 
+const DEFAULT_CONFIG = {
+  baseUrl: "",
+  token: "",
+  resultNum: 10,
+  openLinkType: "newTab",
+  themeGoogle: "auto",
+  themeDuckduckgo: "auto",
+  themeBrave: "auto",
+  themeSearx: "auto",
+};
+
 export async function getConfiguration() {
-  let config = "";
-
-  const configJson = await getStorage().get(CONFIG_KEY);
-
-  if (
-    // if there is no saved configuration, save a default configuration
-    configJson &&
-    Object.keys(configJson).length === 0 &&
-    Object.getPrototypeOf(configJson) === Object.prototype
-  ) {
-    config = {
-      baseUrl: "",
-      token: "",
-      resultNum: 10,
-      openLinkType: "newTab",
-      themeGoogle: "auto",
-      themeDuckduckgo: "auto",
-      themeBrave: "auto",
-      themeSearx: "auto",
-    };
-  } else {
-    config = JSON.parse(configJson[CONFIG_KEY]);
-  }
-  return config;
-}
+  return new Promise((resolve) => {
+    getStorage().get(CONFIG_KEY, (data) => {
+      const config = JSON.parse(data[CONFIG_KEY] || DEFAULT_CONFIG);
+      resolve(config);
+    });
+  });
+};
 
 export function saveConfiguration(config) {
   const configJson = JSON.stringify(config);
@@ -35,11 +28,6 @@ export function saveConfiguration(config) {
 }
 
 export async function isConfigurationComplete() {
-  const config = await getConfiguration();
-
-  if (config.baseUrl === "" || config.token === "") {
-    return false;
-  } else {
-    return true;
-  }
-}
+  const { baseUrl, token } = await getConfiguration();
+  return !!baseUrl && !!token;
+};
