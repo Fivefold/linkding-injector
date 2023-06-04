@@ -149,16 +149,14 @@ div#bookmark-list-container {
   .light is added if the manual white theme is set and disables these dark 
   styles, while .dark activates them regardless of global theme.
   */
+  @media (prefers-color-scheme: dark) {
   &.dark,
   .dark-bg &:not(.light),             // DuckDuckGo
   body[data-dt="1"] &:not(.light),    // Google
-  html.dark &:not(.light),            // Brave Search
+  :root:not(.light) &:not(.light),    // Brave Search
   html.theme-dark &:not(.light) {     // Searx
-    @media (prefers-color-scheme: dark) {
       @include dark-styling;
     }
-    
-    @include dark-styling;
   }
   // --------- dark styling end ---------
 
