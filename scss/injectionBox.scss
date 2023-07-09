@@ -58,6 +58,14 @@ div#bookmark-list-container {
   &.searx { // searx-specific styles
     box-shadow: none;
   }
+  
+  &.kagi { // searx-specific styles
+    @media (prefers-color-scheme: dark) {
+      border: 2px solid var(--color-primary-dim_2) !important;
+      background-color: var(--background-color) !important;
+      font-size: .875rem;
+    }
+  }
 
   .tags a:hover {
     text-decoration: none;
