@@ -61,9 +61,6 @@ div#bookmark-list-container {
   
   &.kagi { // kagi-specific styles
     font-size: .875rem;
-    border: 2px solid var(--color-primary-dim_2) !important;
-    background-color: var(--background-color) !important;
-    color: var(--color-primary-dim_8);
   }
 
   .tags a:hover {
@@ -147,8 +144,8 @@ div#bookmark-list-container {
     }
     
     &.kagi:not(.light) {
-     border: 2px solid var(--color-primary-dim_2) !important;
-     background-color: var(--background-color) !important;
+      background-color: $kagi-bg-dark;
+      border: 1px solid $kagi-border-color-dark;
     }
   }
 
@@ -157,6 +154,7 @@ div#bookmark-list-container {
   data-dt=1 is the attribute of the body tag google uses for the dark theme
   .dark is the class brave search globally uses for the dark theme
   .theme-dark is the class searx globally uses for the dark theme
+  .theme_dark is the class kagi globally uses for the dark theme
   
   .light is added if the manual white theme is set and disables these dark 
   styles, while .dark activates them regardless of global theme.
@@ -165,9 +163,10 @@ div#bookmark-list-container {
   &.dark,
   .dark-bg &:not(.light),             // DuckDuckGo
   body[data-dt="1"] &:not(.light),    // Google
-  :root:not(.light) &:not(.light),    // Brave Search
-  html.theme_dark &:not(.theme_light),// Kagi Search
-  html.theme-dark &:not(.light) {     // Searx
+  :root:not(.light) body.is-pc &:not(.light),    // Brave Search
+  html.theme-dark &:not(.light),      // Searx
+  html.theme_dark &:not(.light)       // Kagi
+    {
       @include dark-styling;
     }
   }

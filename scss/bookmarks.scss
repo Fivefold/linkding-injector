@@ -24,8 +24,9 @@ ul#bookmark-list {
     &.dark,
   .dark-bg &:not(.light),             // DuckDuckGo
   body[data-dt="1"] &:not(.light),    // Google
-  :root:not(.light) &:not(.light),   // Brave Search
-  html.theme-dark &:not(.light)     // Searxng
+  :root:not(.light) body.is-pc &:not(.light),    // Brave Search
+  html.theme-dark &:not(.light),      // Searx
+  html.theme_dark &:not(.light)       // Kagi
     {
       .description {
         color: $gray-color-dark;

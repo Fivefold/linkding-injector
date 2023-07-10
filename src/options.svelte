@@ -10,7 +10,7 @@
   let themeGoogle;
   let themeBrave;
   let themeSearx;
-  let themeKagi
+  let themeKagi;
   let isSuccess;
   let isError;
 
@@ -39,7 +39,7 @@
       themeGoogle,
       themeBrave,
       themeSearx,
-      themeKagi
+      themeKagi,
     };
 
     const testResult = await new LinkdingApi(config).testConnection(config);
@@ -217,7 +217,7 @@
         </label>
       </div>
       <div class="form-group p-relative clearfix">
-        <div class="form-label float-left">Kagi Search†</div>
+        <div class="form-label float-left">Kagi Search</div>
         <label class="form-radio form-inline float-right">
           <input type="radio" bind:group={themeKagi} value="light" />
           <i class="form-icon" />light
