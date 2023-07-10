@@ -11,6 +11,7 @@ const DEFAULT_CONFIG = {
   themeDuckduckgo: "auto",
   themeBrave: "auto",
   themeSearx: "auto",
+  themeKagi: "auto"
 };
 
 export async function getConfiguration() {
