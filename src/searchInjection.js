@@ -25,7 +25,7 @@ if (document.location.hostname.match(/duckduckgo/)) {
   searchEngine = "google";
 } else if (document.location.hostname.match(/search\.brave\.com/)) {
   searchEngine = "brave";
-} else if (document.location.hostname.match(/kagi/)) {
+} else if (document.location.hostname.match(/kagi\.com/)) {
   searchEngine = "kagi";
 } else if (document.location.href.match(/http.?:\/\/.+\/search/)) {
   searchEngine = "searx";
