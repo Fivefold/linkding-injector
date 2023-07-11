@@ -29,6 +29,11 @@
       "js": ["build/searchInjection.js"]
     },
     {
+      "matches": ["*://kagi.com/*"],
+      "css": ["build/searchInjection.css"],
+      "js": ["build/searchInjection.js"]
+    },
+    {
       "matches": ["*://*/search?*", "*://*/search"],
       "css": ["build/searchInjection.css"],
       "js": ["build/searchInjection.js"]

@@ -25,6 +25,8 @@ if (document.location.hostname.match(/duckduckgo/)) {
   searchEngine = "google";
 } else if (document.location.hostname.match(/search\.brave\.com/)) {
   searchEngine = "brave";
+} else if (document.location.hostname.match(/kagi\.com/)) {
+  searchEngine = "kagi";
 } else if (document.location.href.match(/http.?:\/\/.+\/search/)) {
   searchEngine = "searx";
 } else {
@@ -73,6 +75,7 @@ port.onMessage.addListener(function (m) {
       google: m.config.themeGoogle,
       brave: m.config.themeBrave,
       searx: m.config.themeSearx,
+      kagi: m.config.themeKagi,
     };
 
     const theme = themes[searchEngine];
@@ -152,6 +155,7 @@ port.onMessage.addListener(function (m) {
     google: "#rhs",
     brave: "#side-right",
     searx: "#sidebar",
+    kagi: ".right-content-box",
   };
   const sidebarSelector = sidebarSelectors[searchEngine];
   let sidebar = document.querySelector(sidebarSelector);
