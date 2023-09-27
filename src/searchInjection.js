@@ -153,7 +153,7 @@ port.onMessage.addListener(function (m) {
   const sidebarSelectors = {
     duckduckgo: "section[data-area=sidebar]",
     google: "#rhs",
-    brave: "#side-right",
+    brave: "aside.sidebar",
     searx: "#sidebar",
     kagi: ".right-content-box",
   };
@@ -196,6 +196,14 @@ let urlParams = new URLSearchParams(queryString);
 let searchTerm = escapeHTML(urlParams.get("q"));
 if (searchEngine == "searx") {
   searchTerm = escapeHTML(document.querySelector("input#q").value);
+}
+
+if (searchEngine == "brave") {
+  // Brave search seems to remove the injection box if it is injected too soon.
+  // Wait a bit before injecting.
+  setTimeout(function () {
+    port.postMessage({ searchTerm: searchTerm });
+  }, 500);
 }
 
 port.postMessage({ searchTerm: searchTerm });
