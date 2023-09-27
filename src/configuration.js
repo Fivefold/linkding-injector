@@ -17,8 +17,13 @@ const DEFAULT_CONFIG = {
 export async function getConfiguration() {
   return new Promise((resolve) => {
     getStorage().get(CONFIG_KEY, (data) => {
-      const config = JSON.parse(data[CONFIG_KEY] || DEFAULT_CONFIG);
-      resolve(config);
+      try {
+        const config = JSON.parse(data[CONFIG_KEY]);
+        resolve(config);
+      } catch {
+        const config = DEFAULT_CONFIG
+        resolve(config);
+      }
     });
   });
 };
