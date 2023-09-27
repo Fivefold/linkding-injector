@@ -25,6 +25,8 @@ if (document.location.hostname.match(/duckduckgo/)) {
   searchEngine = "google";
 } else if (document.location.hostname.match(/search\.brave\.com/)) {
   searchEngine = "brave";
+} else if (document.location.hostname.match(/kagi\.com/)) {
+  searchEngine = "kagi";
 } else if (document.location.href.match(/http.?:\/\/.+\/search/)) {
   searchEngine = "searx";
 } else {
@@ -73,6 +75,7 @@ port.onMessage.addListener(function (m) {
       google: m.config.themeGoogle,
       brave: m.config.themeBrave,
       searx: m.config.themeSearx,
+      kagi: m.config.themeKagi,
     };
 
     const theme = themes[searchEngine];
@@ -150,8 +153,9 @@ port.onMessage.addListener(function (m) {
   const sidebarSelectors = {
     duckduckgo: "section[data-area=sidebar]",
     google: "#rhs",
-    brave: "#side-right",
+    brave: "aside.sidebar",
     searx: "#sidebar",
+    kagi: ".right-content-box",
   };
   const sidebarSelector = sidebarSelectors[searchEngine];
   let sidebar = document.querySelector(sidebarSelector);
@@ -192,6 +196,14 @@ let urlParams = new URLSearchParams(queryString);
 let searchTerm = escapeHTML(urlParams.get("q"));
 if (searchEngine == "searx") {
   searchTerm = escapeHTML(document.querySelector("input#q").value);
+}
+
+if (searchEngine == "brave") {
+  // Brave search seems to remove the injection box if it is injected too soon.
+  // Wait a bit before injecting.
+  setTimeout(function () {
+    port.postMessage({ searchTerm: searchTerm });
+  }, 500);
 }
 
 port.postMessage({ searchTerm: searchTerm });

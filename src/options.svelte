@@ -10,6 +10,7 @@
   let themeGoogle;
   let themeBrave;
   let themeSearx;
+  let themeKagi;
   let isSuccess;
   let isError;
 
@@ -23,6 +24,7 @@
     themeGoogle = config.themeGoogle;
     themeBrave = config.themeBrave;
     themeSearx = config.themeSearx;
+    themeKagi = config.themeKagi;
   }
 
   init();
@@ -37,6 +39,7 @@
       themeGoogle,
       themeBrave,
       themeSearx,
+      themeKagi,
     };
 
     const testResult = await new LinkdingApi(config).testConnection(config);
@@ -210,6 +213,21 @@
         </label>
         <label class="form-radio form-inline float-right">
           <input type="radio" bind:group={themeSearx} value="auto" />
+          <i class="form-icon" />auto (default)
+        </label>
+      </div>
+      <div class="form-group p-relative clearfix">
+        <div class="form-label float-left">Kagi Search</div>
+        <label class="form-radio form-inline float-right">
+          <input type="radio" bind:group={themeKagi} value="light" />
+          <i class="form-icon" />light
+        </label>
+        <label class="form-radio form-inline float-right">
+          <input type="radio" bind:group={themeKagi} value="dark" />
+          <i class="form-icon" />dark
+        </label>
+        <label class="form-radio form-inline float-right">
+          <input type="radio" bind:group={themeKagi} value="auto" />
           <i class="form-icon" />auto (default)
         </label>
       </div>

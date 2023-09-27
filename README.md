@@ -50,7 +50,7 @@ Run the build as described below and then follow the instructions [here](https:/
 - bash (on Linux) or powershell (on Windows)
 - npx (included with npm v5.2+)
 
-Internally, we use `web-ext` to bundle a distribution package for the extension for Firefox. You do not need to install `web-ext`. Note that `web-ext` will generate a zip file which can also be used for the Chrome Web Store.
+Internally, we use `web-ext` to bundle a distribution package for the extension for Firefox. You do not need to install `web-ext`. Note that `web-ext` will generate a zip file which can also be used for the Chrome Web Store (but see the next section for Chrome-specific build instructions).
 
 Then run the following script to generate a build (might need to make the file executable on Linux using `chmod +x build.sh`):
 ```bash
@@ -68,6 +68,12 @@ The script does:
 After the build the root directory contains the complete, unpackaged extension. Use the `manifest.json` file to load it manually into the browser.
 
 The packaged extension can be found in the `web-ext-artifacts` folder.
+
+For developing you might prefer using `npm run dev` to create an unpackaged development build. This won't package the extension and won't minify the code but is faster and makes debugging in the browser easier.
+
+### Building for Chrome-based browsers
+
+Chrome switched over to Manifest V3. Same build instructions as above apply, but before building you need to checkout the `chrome_manifest_v3` branch. The only relevant difference in that branch is the [manifest.json](https://github.com/Fivefold/linkding-injector/blob/master/manifest.json).
 
 ## Acknowledgements
 

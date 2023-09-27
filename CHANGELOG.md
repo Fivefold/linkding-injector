@@ -1,3 +1,7 @@
+## v1.3.2 (02/06/2023)
+- [**bug**] Fixed a bug where no results where shown if several URL parameters were in a GET request (see #18)
+---
+
 ## v1.3.1 (29/05/2023)
 - [**bug**] Fix broken duckduckgo support
 ---

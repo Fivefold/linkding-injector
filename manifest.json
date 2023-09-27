@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
   "name": "linkding injector",
-  "version": "1.3.2",
+  "version": "1.3.3",
   "description": "Injects search results from the linkding bookmark service into search pages like google and duckduckgo",
   "homepage_url": "https://github.com/fivefold/linkding-injector.git",
 
@@ -25,6 +25,11 @@
     },
     {
       "matches": ["*://search.brave.com/*"],
+      "css": ["build/searchInjection.css"],
+      "js": ["build/searchInjection.js"]
+    },
+    {
+      "matches": ["*://kagi.com/*"],
       "css": ["build/searchInjection.css"],
       "js": ["build/searchInjection.js"]
     },
