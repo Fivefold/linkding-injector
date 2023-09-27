@@ -1,3 +1,9 @@
+## v1.3.3 (27/09/2023)
+- [**feature**] New search engine: Kagi. Thank you, @danbush (see #21)
+- [**enhancement**] Improved theme detection and backend code improvements. Thank you, @Sevichecc (see #19 and #20)
+- [**bug**] Fixed broken Brave Search support (see #22)
+- [**bug**] Fixed a bug where a fresh installation wouldn't work because there was no saved configuration.
+
 ## v1.3.2 (02/06/2023)
 - [**bug**] Fixed a bug where no results where shown if several URL parameters were in a GET request (see #18)
 ---
