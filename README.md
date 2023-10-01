@@ -9,6 +9,7 @@ Community browser extension for the self-hosted [linkding](https://github.com/si
   - [duckduckgo](https://duckduckgo.com/)
   - [SearX/SearXNG](https://duckduckgo.com/)*
   - [Brave Search](https://search.brave.com/)
+  - [Kagi](https://kagi.com/)
 - Automatic light or dark theme detection
 
 Works with: Firefox, Chrome
