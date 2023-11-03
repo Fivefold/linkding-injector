@@ -11,7 +11,8 @@ const DEFAULT_CONFIG = {
   themeDuckduckgo: "auto",
   themeBrave: "auto",
   themeSearx: "auto",
-  themeKagi: "auto"
+  themeKagi: "auto",
+  themeQwant: "auto",
 };
 
 export async function getConfiguration() {
@@ -21,12 +22,12 @@ export async function getConfiguration() {
         const config = JSON.parse(data[CONFIG_KEY]);
         resolve(config);
       } catch {
-        const config = DEFAULT_CONFIG
+        const config = DEFAULT_CONFIG;
         resolve(config);
       }
     });
   });
-};
+}
 
 export function saveConfiguration(config) {
   const configJson = JSON.stringify(config);
@@ -36,4 +37,4 @@ export function saveConfiguration(config) {
 export async function isConfigurationComplete() {
   const { baseUrl, token } = await getConfiguration();
   return !!baseUrl && !!token;
-};
+}

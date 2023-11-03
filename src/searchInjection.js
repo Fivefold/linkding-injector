@@ -19,7 +19,7 @@ const browser = getBrowser();
 
 const port = browser.runtime.connect({ name: "port-from-cs" });
 let searchEngine;
-if (document.location.hostname.match(/duckduckgo/)) {
+if (document.location.hostname.match(/duckduckgo\.com/)) {
   searchEngine = "duckduckgo";
 } else if (document.location.hostname.match(/google/)) {
   searchEngine = "google";
@@ -29,8 +29,10 @@ if (document.location.hostname.match(/duckduckgo/)) {
   searchEngine = "kagi";
 } else if (document.location.href.match(/http.?:\/\/.+\/search/)) {
   searchEngine = "searx";
+} else if (document.location.hostname.match(/qwant\.com/)) {
+  searchEngine = "qwant";
 } else {
-  console.debug("Linkding-Injector extension: no search engine found.");
+  console.debug("Linkding-Injector extension: unknown search engine.");
 }
 
 // When background script answers with results, construct html for the result box
@@ -76,6 +78,7 @@ port.onMessage.addListener(function (m) {
       brave: m.config.themeBrave,
       searx: m.config.themeSearx,
       kagi: m.config.themeKagi,
+      qwant: m.config.themeQwant,
     };
 
     const theme = themes[searchEngine];
@@ -156,6 +159,7 @@ port.onMessage.addListener(function (m) {
     brave: "aside.sidebar",
     searx: "#sidebar",
     kagi: ".right-content-box",
+    qwant: ".is-sidebar",
   };
   const sidebarSelector = sidebarSelectors[searchEngine];
   let sidebar = document.querySelector(sidebarSelector);

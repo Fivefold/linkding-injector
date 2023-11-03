@@ -2,6 +2,8 @@
 
 Community browser extension for the self-hosted [linkding](https://github.com/sissbruecker/linkding) bookmark service.
 
+***_Ever created bookmarks, only to forget about them later? Don't regularly search within your bookmarks? This extension is designed to help with this kind of problem._***
+
 **Features**
 - When searching on a search engine the search term is also sent to your linkding instance and results are added in a new box in the sidebar right to the search engine results.
 - Supports the following search engines:
@@ -9,6 +11,7 @@ Community browser extension for the self-hosted [linkding](https://github.com/si
   - [duckduckgo](https://duckduckgo.com/)
   - [SearX/SearXNG](https://duckduckgo.com/)*
   - [Brave Search](https://search.brave.com/)
+  - [Kagi](https://kagi.com/)
 - Automatic light or dark theme detection
 
 Works with: Firefox, Chrome

@@ -63,6 +63,12 @@ div#bookmark-list-container {
     font-size: .875rem;
   }
 
+  &.qwant { // qwant-specific styles
+    box-shadow: none;
+    border-radius: 12px;
+    font-size: 14px;
+  }
+
   .tags a:hover {
     text-decoration: none;
     cursor: default;
@@ -147,6 +153,11 @@ div#bookmark-list-container {
       background-color: $kagi-bg-dark;
       border: 1px solid $kagi-border-color-dark;
     }
+
+    &.qwant:not(.light) {
+      background-color: $qwant-bg-dark;
+      border: 1px solid $qwant-border-color-dark;
+    }
   }
 
   /**
@@ -161,11 +172,12 @@ div#bookmark-list-container {
   */
   @media (prefers-color-scheme: dark) {
   &.dark,
-  .dark-bg &:not(.light),             // DuckDuckGo
-  body[data-dt="1"] &:not(.light),    // Google
-  :root:not(.light) body.is-pc &:not(.light),    // Brave Search
-  html.theme-dark &:not(.light),      // Searx
-  html.theme_dark &:not(.light)       // Kagi
+  .dark-bg &:not(.light),                         // DuckDuckGo
+  body[data-dt="1"] &:not(.light),                // Google
+  :root:not(.light) body.is-pc &:not(.light),     // Brave Search
+  html.theme-dark &:not(.light),                  // Searx
+  html.theme_dark &:not(.light),                  // Kagi
+  body[data-theme=dark] &:not(.light)             // Qwant
     {
       @include dark-styling;
     }
