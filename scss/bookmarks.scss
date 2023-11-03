@@ -22,11 +22,12 @@ ul#bookmark-list {
 
   @media (prefers-color-scheme: dark) {
     &.dark,
-  .dark-bg &:not(.light),             // DuckDuckGo
-  body[data-dt="1"] &:not(.light),    // Google
-  :root:not(.light) body.is-pc &:not(.light),    // Brave Search
-  html.theme-dark &:not(.light),      // Searx
-  html.theme_dark &:not(.light)       // Kagi
+  .dark-bg &:not(.light),                         // DuckDuckGo
+  body[data-dt="1"] &:not(.light),                // Google
+  :root:not(.light) body.is-pc &:not(.light),     // Brave Search
+  html.theme-dark &:not(.light),                  // Searx
+  html.theme_dark &:not(.light),                  // Kagi
+  body[data-theme=dark] &:not(.light)             // Qwant
     {
       .description {
         color: $gray-color-dark;

@@ -11,6 +11,7 @@
   let themeBrave;
   let themeSearx;
   let themeKagi;
+  let themeQwant;
   let isSuccess;
   let isError;
 
@@ -25,6 +26,7 @@
     themeBrave = config.themeBrave;
     themeSearx = config.themeSearx;
     themeKagi = config.themeKagi;
+    themeQwant = config.themeQwant;
   }
 
   init();
@@ -40,6 +42,7 @@
       themeBrave,
       themeSearx,
       themeKagi,
+      themeQwant,
     };
 
     const testResult = await new LinkdingApi(config).testConnection(config);
@@ -228,6 +231,21 @@
         </label>
         <label class="form-radio form-inline float-right">
           <input type="radio" bind:group={themeKagi} value="auto" />
+          <i class="form-icon" />auto (default)
+        </label>
+      </div>
+      <div class="form-group p-relative clearfix">
+        <div class="form-label float-left">Qwant</div>
+        <label class="form-radio form-inline float-right">
+          <input type="radio" bind:group={themeQwant} value="light" />
+          <i class="form-icon" />light
+        </label>
+        <label class="form-radio form-inline float-right">
+          <input type="radio" bind:group={themeQwant} value="dark" />
+          <i class="form-icon" />dark
+        </label>
+        <label class="form-radio form-inline float-right">
+          <input type="radio" bind:group={themeQwant} value="auto" />
           <i class="form-icon" />auto (default)
         </label>
       </div>
