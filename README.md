@@ -17,7 +17,7 @@ Community browser extension for the self-hosted [linkding](https://github.com/si
 
 Works with: Firefox, Chrome
 
-_\* experimental, please read [this](docs/searx.md) if you have problems_
+_\* experimental, please read [this](https://github.com/Fivefold/linkding-injector/wiki/SearX-SearXNG-support) if you have problems_
 
 **Usage**
 
