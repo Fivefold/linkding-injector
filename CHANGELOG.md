@@ -1,3 +1,6 @@
+## v1.3.4 (03/11/2023)
+- [**feature**] New search engine: Qwant.
+
 ## v1.3.3 (27/09/2023)
 - [**feature**] New search engine: Kagi. Thank you, @danbush (see #21)
 - [**enhancement**] Improved theme detection and backend code improvements. Thank you, @Sevichecc (see #19 and #20)

@@ -12,11 +12,12 @@ Community browser extension for the self-hosted [linkding](https://github.com/si
   - [SearX/SearXNG](https://duckduckgo.com/)*
   - [Brave Search](https://search.brave.com/)
   - [Kagi](https://kagi.com/)
+  - [Qwant](https://www.qwant.com/)
 - Automatic light or dark theme detection
 
 Works with: Firefox, Chrome
 
-_\* experimental, please read [this](docs/searx.md) if you have problems_
+_\* experimental, please read [this](https://github.com/Fivefold/linkding-injector/wiki/SearX-SearXNG-support) if you have problems_
 
 **Usage**
 

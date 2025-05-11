@@ -1,6 +1,6 @@
 {
   "name": "linkding-injector",
-  "version": "1.3.2",
+  "version": "1.3.5",
   "description": "Injects search results from the linkding bookmark service into search pages like google and duckduckgo",
   "license": "MIT",
   "author": "Jakob Essbüchl",
@@ -17,18 +17,18 @@
     "dev": "rollup -c -w && sass scss/theme.scss build/searchInjection.css"
   },
   "dependencies": {
-    "@rollup/plugin-commonjs": "^17.0.0",
-    "@rollup/plugin-node-resolve": "^11.0.1",
-    "rollup": "^2.35.1",
-    "rollup-plugin-svelte": "^7.0.0",
-    "rollup-plugin-terser": "^7.0.2",
+    "@rollup/plugin-commonjs": "^28.0.3",
+    "@rollup/plugin-node-resolve": "^16.0.1",
+    "@rollup/plugin-terser": "^0.4.4",
+    "rollup": "^4.40.2",
+    "rollup-plugin-svelte": "^7.2.2",
     "spectre.css": "^0.5.9",
-    "svelte": "^3.31.0"
+    "svelte": "^4.2.19"
   },
   "devDependencies": {
-    "prettier": "^2.2.1",
-    "web-ext": "^7.6.2",
     "postcss": ">=8.4.31",
-    "tough-cookie": ">=4.1.3"
+    "prettier": "^2.2.1",
+    "tough-cookie": ">=4.1.3",
+    "web-ext": "^8.6.0"
   }
 }
