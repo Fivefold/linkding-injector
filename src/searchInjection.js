@@ -35,6 +35,16 @@ if (document.location.hostname.match(/duckduckgo\.com/)) {
   console.debug("Linkding-Injector extension: unknown search engine.");
 }
 
+// CSS selectors for finding the sidebar to later inject into
+const sidebarSelectors = {
+  duckduckgo: "section[data-area=sidebar]",
+  google: "#rhs",
+  brave: "aside.sidebar",
+  searx: "#sidebar",
+  kagi: ".right-content-box",
+  qwant: ".is-sidebar",
+};
+
 // When background script answers with results, construct html for the result box
 port.onMessage.addListener(function (m) {
   const parser = new DOMParser();
@@ -152,15 +162,6 @@ port.onMessage.addListener(function (m) {
   }
 
   // Finding the sidebar
-
-  const sidebarSelectors = {
-    duckduckgo: "section[data-area=sidebar]",
-    google: "#rhs",
-    brave: "aside.sidebar",
-    searx: "#sidebar",
-    kagi: ".right-content-box",
-    qwant: ".is-sidebar",
-  };
   const sidebarSelector = sidebarSelectors[searchEngine];
   let sidebar = document.querySelector(sidebarSelector);
 
@@ -207,7 +208,22 @@ if (searchEngine == "brave") {
   // Wait a bit before injecting.
   setTimeout(function () {
     port.postMessage({ searchTerm: searchTerm });
-  }, 500);
+  }, 1600);
+} else if (searchEngine == "qwant") {
+  // Qwant asynchronously loads the sidebar. We need to watch for when the
+  // sidebar is loaded and only then start the injection
+  const qwantObserver = new MutationObserver((mutations, observer) => {
+    if (document.querySelector(sidebarSelectors["qwant"])) {
+      port.postMessage({ searchTerm: searchTerm });
+      observer.disconnect(); // Stop observing after the element appears
+    }
+  });
+
+  qwantObserver.observe(document.body, {
+    childList: true,
+    subtree: true
+  });
+} else {
+  port.postMessage({ searchTerm: searchTerm });
 }
 
-port.postMessage({ searchTerm: searchTerm });
