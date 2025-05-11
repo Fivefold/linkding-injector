@@ -1,3 +1,7 @@
+## v1.3.5 (11/05/2025)
+- [**bug**] Fix broken Qwant injection (see #30)
+- [**chore**] Bump NPM packages
+
 ## v1.3.4 (03/11/2023)
 - [**feature**] New search engine: Qwant.
 
