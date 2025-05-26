@@ -38,6 +38,11 @@
       "css": ["build/searchInjection.css"],
       "js": ["build/searchInjection.js"]
     },
+	{
+	      "matches": ["*://www.ecosia.org/*"],  
+	      "css": ["build/searchInjection.css"],
+	      "js": ["build/searchInjection.js"]
+	},
     {
       "matches": ["*://*/search?*", "*://*/search"],
       "css": ["build/searchInjection.css"],
