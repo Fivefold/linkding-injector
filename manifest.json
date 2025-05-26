@@ -1,5 +1,5 @@
 {
-  "manifest_version": 3,
+  "manifest_version": 2,
   "name": "linkding injector",
   "version": "1.3.5",
   "description": "Injects search results from the linkding bookmark service into search pages like google and duckduckgo",
@@ -14,7 +14,7 @@
   },
 
   "background": {
-	  "scripts": ["build/background.js"]
+    "scripts": ["build/background.js"]
   },
 
   "content_scripts": [
@@ -250,14 +250,7 @@
     "page": "options/index.html"
   },
 
-  "web_accessible_resources": [
-    {
-      "resources": ["/icons/*.png", "/icons/*.svg"],
-      "matches": ["https://*/*", "http://*/*"]
-    }
-  ],
+  "web_accessible_resources": ["icons/*.png", "icons/*.svg"],
 
-  "permissions": ["storage"],
-
-  "host_permissions": ["https://*/*", "http://*/*"]
+  "permissions": ["https://*/*", "http://*/*", "storage"]
 }
