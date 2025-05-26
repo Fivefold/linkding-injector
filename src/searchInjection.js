@@ -27,12 +27,12 @@ if (document.location.hostname.match(/duckduckgo\.com/)) {
   searchEngine = "brave";
 } else if (document.location.hostname.match(/kagi\.com/)) {
   searchEngine = "kagi";
-} else if (document.location.href.match(/http.?:\/\/.+\/search/)) {
-  searchEngine = "searx";
 } else if (document.location.hostname.match(/qwant\.com/)) {
   searchEngine = "qwant";
 } else if (document.location.hostname.match(/ecosia\.org/)) { // <--- ADD THIS BLOCK
   searchEngine = "ecosia";
+} else if (document.location.href.match(/http.?:\/\/.+\/search/)) {
+  searchEngine = "searx";
 } else {
   console.debug("Linkding-Injector extension: unknown search engine.");
 }

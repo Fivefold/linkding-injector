@@ -1,5 +1,5 @@
 {
-  "manifest_version": 2,
+  "manifest_version": 3,
   "name": "linkding injector",
   "version": "1.3.5",
   "description": "Injects search results from the linkding bookmark service into search pages like google and duckduckgo",
@@ -14,7 +14,7 @@
   },
 
   "background": {
-    "scripts": ["build/background.js"]
+	  "service_worker": "build/background.js"
   },
 
   "content_scripts": [
@@ -39,9 +39,9 @@
       "js": ["build/searchInjection.js"]
     },
 	{
-		      "matches": ["*://www.ecosia.org/*"],  
-		      "css": ["build/searchInjection.css"],
-		      "js": ["build/searchInjection.js"]
+		"matches": ["*://www.ecosia.org/*"],  
+		"css": ["build/searchInjection.css"],
+		"js": ["build/searchInjection.js"]
 	},
     {
       "matches": ["*://*/search?*", "*://*/search"],
@@ -250,7 +250,14 @@
     "page": "options/index.html"
   },
 
-  "web_accessible_resources": ["icons/*.png", "icons/*.svg"],
+  "web_accessible_resources": [
+    {
+      "resources": ["/icons/*.png", "/icons/*.svg"],
+      "matches": ["https://*/*", "http://*/*"]
+    }
+  ],
 
-  "permissions": ["https://*/*", "http://*/*", "storage"]
+  "permissions": ["storage"],
+
+  "host_permissions": ["https://*/*", "http://*/*"]
 }
