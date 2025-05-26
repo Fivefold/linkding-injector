@@ -14,7 +14,7 @@
   },
 
   "background": {
-    "service_worker": "build/background.js"
+	  "scripts": ["build/background.js"]
   },
 
   "content_scripts": [

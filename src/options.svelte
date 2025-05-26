@@ -252,7 +252,7 @@
           <i class="form-icon" />auto (default)
         </label>
       </div>
-      <div class="form-group p-relative clearfix"> // <--- ADD THIS NEW BLOCK
+      <div class="form-group p-relative clearfix">
         <div class="form-label float-left">Ecosia</div>
         <label class="form-radio form-inline float-right">
           <input type="radio" bind:group={themeEcosia} value="light" />
