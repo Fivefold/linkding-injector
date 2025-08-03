@@ -41,7 +41,7 @@ const sidebarSelectors = {
   google: "#rhs",
   brave: "aside.sidebar",
   searx: "#sidebar",
-  kagi: ".right-content-box",
+  kagi: ".right-content-box > ._0_right_sidebar",
   qwant: ".is-sidebar",
 };
 
