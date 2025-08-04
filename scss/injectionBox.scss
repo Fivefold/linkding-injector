@@ -178,7 +178,8 @@ div#bookmark-list-container {
   :root:not(.light) body.is-pc &:not(.light),     // Brave Search
   html.theme-dark &:not(.light),                  // Searx
   html.theme_dark &:not(.light),                  // Kagi
-  body[data-theme=dark] &:not(.light)             // Qwant
+  body[data-theme=dark] &:not(.light),             // Qwant
+  html.dark &:not(.light)                          // Ecosia
     {
       @include dark-styling;
     }

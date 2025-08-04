@@ -27,10 +27,12 @@ if (document.location.hostname.match(/duckduckgo\.com/)) {
   searchEngine = "brave";
 } else if (document.location.hostname.match(/kagi\.com/)) {
   searchEngine = "kagi";
-} else if (document.location.href.match(/http.?:\/\/.+\/search/)) {
-  searchEngine = "searx";
 } else if (document.location.hostname.match(/qwant\.com/)) {
   searchEngine = "qwant";
+} else if (document.location.hostname.match(/ecosia\.org/)) { // <--- ADD THIS BLOCK
+  searchEngine = "ecosia";
+} else if (document.location.href.match(/http.?:\/\/.+\/search/)) {
+  searchEngine = "searx";
 } else {
   console.debug("Linkding-Injector extension: unknown search engine.");
 }
@@ -43,6 +45,7 @@ const sidebarSelectors = {
   searx: "#sidebar",
   kagi: ".right-content-box > ._0_right_sidebar",
   qwant: ".is-sidebar",
+  ecosia: "aside.sidebar",
 };
 
 // When background script answers with results, construct html for the result box
@@ -89,6 +92,7 @@ port.onMessage.addListener(function (m) {
       searx: m.config.themeSearx,
       kagi: m.config.themeKagi,
       qwant: m.config.themeQwant,
+	  ecosia: m.config.themeEcosia,
     };
 
     const theme = themes[searchEngine];
