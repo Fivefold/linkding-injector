@@ -1,3 +1,8 @@
+## v1.3.6 (26/10/2025)
+- [**bug**] Fix broken Kagi injection (see #33)
+- [**enhancement**] change to extension manifest v3, simplifying cross-browser development
+- [**chore**] Bump NPM packages
+
 ## v1.3.5 (11/05/2025)
 - [**bug**] Fix broken Qwant injection (see #30)
 - [**chore**] Bump NPM packages
