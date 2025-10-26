@@ -1,4 +1,6 @@
-![logo](/icons/logo_full.svg)
+<center>
+<img src="/icons/logo_full.svg" alt="logo" width="600" height="auto">
+</center>
 
 Community browser extension for the self-hosted [linkding](https://github.com/sissbruecker/linkding) bookmark service.
 
@@ -32,9 +34,31 @@ Once the extension is properly configured linkding search results will show in t
 
 ## Installation
 
-Firefox: [Mozilla Addon Store](https://addons.mozilla.org/en-US/firefox/addon/linkding-injector/)
 
-Chrome: [Chrome Web Store](https://chrome.google.com/webstore/detail/linkding-injector/odjhldcomjlmfbdfeopdkeinpkmjibok)
+
+
+
+
+
+
+<table>
+  <tr>
+    <td>
+      <a href="https://addons.mozilla.org/en-US/firefox/addon/linkding-injector/">
+        <img src="https://blog.mozilla.org/addons/files/2020/04/get-the-addon-fx-apr-2020.svg" alt="Get the addon from the Mozilla Addon Store" width="200" height="200">
+      </a>
+    </td>
+    <td>
+      <a href="https://chrome.google.com/webstore/detail/linkding-injector/odjhldcomjlmfbdfeopdkeinpkmjibok">
+        <img src="https://developer.chrome.com/static/docs/webstore/branding/image/HRs9MPufa1J1h5glNhut.png" alt="Get the addon from the Chrome Web Store" width="231" height="200">
+      </a>
+    </td>
+  </tr>
+  <tr>
+    <td><a href="https://addons.mozilla.org/en-US/firefox/addon/linkding-injector/">Mozilla Addon Store</a></td>
+    <td><a href="https://chrome.google.com/webstore/detail/linkding-injector/odjhldcomjlmfbdfeopdkeinpkmjibok">Chrome Web Store</a></td>
+  </tr>
+</table>
 
 ## Manual installation
 
@@ -74,10 +98,6 @@ After the build the root directory contains the complete, unpackaged extension. 
 The packaged extension can be found in the `web-ext-artifacts` folder.
 
 For developing you might prefer using `npm run dev` to create an unpackaged development build. This won't package the extension and won't minify the code but is faster and makes debugging in the browser easier.
-
-### Building for Chrome-based browsers
-
-Chrome switched over to Manifest V3. Same build instructions as above apply, but before building you need to checkout the `chrome_manifest_v3` branch. The only relevant difference in that branch is the [manifest.json](https://github.com/Fivefold/linkding-injector/blob/master/manifest.json).
 
 ## Acknowledgements
 
