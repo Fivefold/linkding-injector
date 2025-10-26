@@ -1,12 +1,12 @@
-<center>
-<img src="/icons/logo_full.svg" alt="logo" width="600" height="auto">
-</center>
+<div align="center">
+<img src="/icons/logo_full.svg" alt="logo" width="400" height="auto">
 
 Community browser extension for the self-hosted [linkding](https://github.com/sissbruecker/linkding) bookmark service.
+</div>
 
 ***_Ever created bookmarks, only to forget about them later? Don't regularly search within your bookmarks? This extension is designed to help with this kind of problem._***
 
-**Features**
+## Features
 - When searching on a search engine the search term is also sent to your linkding instance and results are added in a new box in the sidebar right to the search engine results.
 - Supports the following search engines:
   - [google](https://www.google.com/)
@@ -17,17 +17,17 @@ Community browser extension for the self-hosted [linkding](https://github.com/si
   - [Qwant](https://www.qwant.com/)
 - Automatic light or dark theme detection
 
-Works with: Firefox, Chrome
+Tested with: Firefox, Chrome
 
 _\* experimental, please read [this](https://github.com/Fivefold/linkding-injector/wiki/SearX-SearXNG-support) if you have problems_
 
-**Usage**
+## Usage
 
 After installation the extension needs to be configured and connected to your linkding instance. Either open the extension options in the browser extension manager or follow the link in the new linkding injector box on the search page of google or duckduckgo.
 
-Once the extension is properly configured linkding search results will show in the right sidebar. If there are no search results nothing will appear.
+Once the extension is properly configured linkding search results will show in the right sidebar. **If there are no search results nothing will appear.**
 
-**Screenshots**
+## Screenshots
 
 ![duckduckgo](/docs/duckduckgo.png "Duckduckgo")
 ![google](/docs/google.png "google")
