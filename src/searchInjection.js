@@ -58,8 +58,8 @@ port.onMessage.addListener(function (m) {
     htmlString = `
     <div id="bookmark-list-container" class="${searchEngine}">
       <div id="navbar">
-        <a id="ld-logo">  
-          <img src=${browser.runtime.getURL("icons/logo.svg")} class="setup" />
+        <a id="ld-logo">
+          ${m.config.showLogo ? `<img src="${browser.runtime.getURL("icons/logo.svg")}" class="setup" />` : ""}
           <h1>linkding injector</h1>
         </a>
         <a id="ld-options" class="openOptions">
@@ -107,8 +107,8 @@ port.onMessage.addListener(function (m) {
     htmlString += `
     <div id="bookmark-list-container" class="${searchEngine} ${themeClass}">
       <div id="navbar">
-        <a id="ld-logo" href="${linkdingUrl}">  
-          <img src=${browser.runtime.getURL("icons/logo.svg")} />
+        <a id="ld-logo" href="${linkdingUrl}">
+          ${m.config.showLogo ? `<img src="${browser.runtime.getURL("icons/logo.svg")}" />` : ""}
           <h1>linkding injector</h1>
         </a>
         <div id="results_amount">
