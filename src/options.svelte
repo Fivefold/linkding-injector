@@ -5,6 +5,7 @@
   let baseUrl;
   let token;
   let resultNum;
+  let showLogo;
   let openLinkType;
   let themeDuckduckgo;
   let themeGoogle;
@@ -20,6 +21,7 @@
     baseUrl = config.baseUrl;
     token = config.token;
     resultNum = config.resultNum;
+    showLogo = config.showLogo;
     openLinkType = config.openLinkType;
     themeDuckduckgo = config.themeDuckduckgo;
     themeGoogle = config.themeGoogle;
@@ -36,6 +38,7 @@
       baseUrl,
       token,
       resultNum,
+      showLogo,
       openLinkType,
       themeDuckduckgo,
       themeGoogle,
@@ -122,6 +125,18 @@
       Advanced Settings
     </label>
     <div class="accordion-body">
+      <div class="form-group">
+        <label class="form-checkbox">
+          <input
+            type="checkbox"
+            bind:checked={showLogo}
+          />
+        <i class="form-icon"></i>
+        <span>Show logo</span>
+      </label>
+      <div class="form-input-hint">
+        Shows or hides the extension logo on the results title.
+      </div>
       <div class="form-group">
         <div class="form-label">Default open link type</div>
         <label class="form-radio">

@@ -6,6 +6,7 @@ const DEFAULT_CONFIG = {
   baseUrl: "",
   token: "",
   resultNum: 10,
+  logoSelected: true,
   openLinkType: "newTab",
   themeGoogle: "auto",
   themeDuckduckgo: "auto",
