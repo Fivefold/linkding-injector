@@ -132,18 +132,6 @@
     </label>
     <div class="accordion-body">
       <div class="form-group">
-        <label class="form-checkbox">
-          <input
-            type="checkbox"
-            bind:checked={showLogo}
-          />
-        <i class="form-icon"></i>
-        <span>Show logo</span>
-      </label>
-      <div class="form-input-hint">
-        Shows or hides the extension logo on the results title.
-      </div>
-      <div class="form-group">
         <div class="form-label">Default open link type</div>
         <label class="form-radio">
           <input
@@ -163,6 +151,18 @@
           />
           <i class="form-icon" />Open links in the same tab
         </label>
+      </div>
+      <div class="form-group">
+        <label class="form-checkbox">
+          <input
+            type="checkbox"
+            bind:checked={showLogo}
+          />
+        <i class="form-icon"></i>
+        <span>Show logo</span>
+      </label>
+      <div class="form-input-hint">
+        Shows or hides the extension logo on the results title.
       </div>
       <div class="form-group p-relative clearfix">
         <div class="form-label">Theme of injection box</div>
