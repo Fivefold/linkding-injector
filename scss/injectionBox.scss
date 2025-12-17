@@ -1,3 +1,7 @@
+.right-content-box {
+  width: var(--wiki_box_width) !important;
+}
+
 div#bookmark-list-container {
   padding: 20px 22px;
   margin-bottom: 20px;
@@ -17,7 +21,7 @@ div#bookmark-list-container {
       cursor: pointer;
     }
   }
-  
+
   &.google { // google-specific styles
     width: 369px;
     box-sizing: border-box;
@@ -37,11 +41,11 @@ div#bookmark-list-container {
     border: none;
     border-radius: 12px;
     font-size: 0.655rem;
-    
+
 
     #navbar #ld-logo {
       flex: 1;
-      
+
       img:not(.setup) {
         width: 35%;
       }
@@ -58,7 +62,7 @@ div#bookmark-list-container {
   &.searx { // searx-specific styles
     box-shadow: none;
   }
-  
+
   &.kagi { // kagi-specific styles
     font-size: .875rem;
   }
@@ -122,20 +126,20 @@ div#bookmark-list-container {
     background-color: $duckduckgo-bg;
     border: none;
     color: $primary-color-dark;
-    
+
     a {
       color: $primary-color-dark;
     }
-    
+
     #navbar #results_amount span {
       color: $alternative-color !important;
     }
-    
+
     .tags a {
       color: $alternative-color;
     }
-    
-    
+
+
     &.google:not(.light) {
       background-color: $google-bg;
       border: 1px solid $google-border-color-dark;
@@ -149,7 +153,7 @@ div#bookmark-list-container {
       background-color: $searx-bg-dark;
       border: 1px solid $searx-border-color-dark;
     }
-    
+
     &.kagi:not(.light) {
       background-color: $kagi-bg-dark;
       border: 1px solid $kagi-border-color-dark;
@@ -167,8 +171,8 @@ div#bookmark-list-container {
   .dark is the class brave search globally uses for the dark theme
   .theme-dark is the class searx globally uses for the dark theme
   .theme_dark is the class kagi globally uses for the dark theme
-  
-  .light is added if the manual white theme is set and disables these dark 
+
+  .light is added if the manual white theme is set and disables these dark
   styles, while .dark activates them regardless of global theme.
   */
   @media (prefers-color-scheme: dark) {
