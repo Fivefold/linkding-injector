@@ -1,3 +1,12 @@
+html:has(meta[name="kagi_version"]) .right-content-box {
+  width: var(--wiki_box_width) !important;
+  position: fixed;
+  right: 10px;
+  max-height: 90%;
+  overflow-x: auto;
+  top: 50px;
+}
+
 .right-content-box {
   width: var(--wiki_box_width) !important;
 }
