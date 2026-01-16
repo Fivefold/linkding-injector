@@ -69,7 +69,6 @@ div#bookmark-list-container {
     font-size: 14px;
     font-family: sans-serif;
   }
-
   .tags a:hover {
     text-decoration: none;
     cursor: default;
@@ -135,6 +134,10 @@ div#bookmark-list-container {
       color: $alternative-color;
     }
     
+    &.startpage:not(.light) {
+      background-color: $startpage-bg-dark;
+      border: 1px solid $startpage-border-color-dark;
+    }
     
     &.google:not(.light) {
       background-color: $google-bg;
@@ -161,6 +164,9 @@ div#bookmark-list-container {
     }
   }
 
+  &.dark {
+    @include dark-styling;
+  }
   /**
   .dark-bg is the class duckduckgo globally uses for the dark theme
   data-dt=1 is the attribute of the body tag google uses for the dark theme
@@ -178,7 +184,8 @@ div#bookmark-list-container {
   :root:not(.light) body.is-pc &:not(.light),     // Brave Search
   html.theme-dark &:not(.light),                  // Searx
   html.theme_dark &:not(.light),                  // Kagi
-  body[data-theme=dark] &:not(.light)             // Qwant
+  body[data-theme=dark] &:not(.light),            // Qwant
+  .layout-web--night &:not(.light)                // Startpage
     {
       @include dark-styling;
     }

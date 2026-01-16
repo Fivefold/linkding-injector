@@ -13,18 +13,25 @@ const DEFAULT_CONFIG = {
   themeSearx: "auto",
   themeKagi: "auto",
   themeQwant: "auto",
+  themeStartpage: "auto",
 };
 
 export async function getConfiguration() {
   return new Promise((resolve) => {
     getStorage().get(CONFIG_KEY, (data) => {
-      try {
-        const config = JSON.parse(data[CONFIG_KEY]);
-        resolve(config);
-      } catch {
-        const config = DEFAULT_CONFIG;
-        resolve(config);
+      let config = { ...DEFAULT_CONFIG }; // Start with defaults
+      
+      if (data && data[CONFIG_KEY]) {
+        try {
+          const savedConfig = JSON.parse(data[CONFIG_KEY]);
+          // Merge saved values OVER the defaults
+          config = { ...config, ...savedConfig };
+        } catch (e) {
+          console.error("Linkding Injector: Failed to parse config", e);
+        }
       }
+      
+      resolve(config);
     });
   });
 }

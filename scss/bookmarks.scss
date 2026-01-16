@@ -27,7 +27,8 @@ ul#bookmark-list {
   :root:not(.light) body.is-pc &:not(.light),     // Brave Search
   html.theme-dark &:not(.light),                  // Searx
   html.theme_dark &:not(.light),                  // Kagi
-  body[data-theme=dark] &:not(.light)             // Qwant
+  body[data-theme=dark] &:not(.light),            // Qwant
+  .layout-web--night &:not(.light)                // Startpage
     {
       .description {
         color: $gray-color-dark;

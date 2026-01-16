@@ -15,6 +15,14 @@ function escapeHTML(str) {
   return p.innerHTML;
 }
 
+function getStartpageTheme() {
+  const theme = document.getElementById('site_theme')?.getAttribute('data-site-theme');
+  if (['dark', 'night'].includes(theme)) return 'dark';
+  if (['light', 'air'].includes(theme)) return 'light';
+  if (theme === 'device') return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+  return '';
+}
+
 const browser = getBrowser();
 
 const port = browser.runtime.connect({ name: "port-from-cs" });
@@ -27,6 +35,8 @@ if (document.location.hostname.match(/duckduckgo\.com/)) {
   searchEngine = "brave";
 } else if (document.location.hostname.match(/kagi\.com/)) {
   searchEngine = "kagi";
+} else if (document.location.hostname.match(/startpage\.com/)) {
+  searchEngine = "startpage";
 } else if (document.location.href.match(/http.?:\/\/.+\/search/)) {
   searchEngine = "searx";
 } else if (document.location.hostname.match(/qwant\.com/)) {
@@ -43,6 +53,7 @@ const sidebarSelectors = {
   searx: "#sidebar",
   kagi: ".right-content-box > ._0_right_sidebar",
   qwant: ".is-sidebar",
+  startpage: ".layout-web__sidebar, #sidebar",
 };
 
 // When background script answers with results, construct html for the result box
@@ -89,12 +100,13 @@ port.onMessage.addListener(function (m) {
       searx: m.config.themeSearx,
       kagi: m.config.themeKagi,
       qwant: m.config.themeQwant,
+      startpage: m.config.themeStartpage || "auto",
     };
 
     const theme = themes[searchEngine];
 
     if (theme == "auto") {
-      themeClass = ""; // automatic theme detection
+      themeClass = (searchEngine === "startpage") ? getStartpageTheme() : ""; // automatic theme detection
     } else {
       themeClass = theme; // "dark" for dark theme, "light" for light theme
     }
@@ -198,11 +210,16 @@ port.onMessage.addListener(function (m) {
 // Start the search by sending a message to background.js with the search term
 let queryString = location.search;
 let urlParams = new URLSearchParams(queryString);
-let searchTerm = escapeHTML(urlParams.get("q"));
-if (searchEngine == "searx") {
-  searchTerm = escapeHTML(document.querySelector("input#q").value);
+let searchTerm = urlParams.get("q") || urlParams.get("query"); // Check both 'q' and 'query'
+
+// If URL params are missing, fallback to input fields
+if (!searchTerm || searchTerm === "null") {
+  searchTerm = document.querySelector("input[name='query'], input#q")?.value || "";
 }
 
+searchTerm = escapeHTML(searchTerm);
+
+// Now handle the engine-specific sending logic
 if (searchEngine == "brave") {
   // Brave search seems to remove the injection box if it is injected too soon.
   // Wait a bit before injecting.
@@ -224,6 +241,7 @@ if (searchEngine == "brave") {
     subtree: true
   });
 } else {
+  // Startpage, Google, DDG, etc. hit this
   port.postMessage({ searchTerm: searchTerm });
 }
 

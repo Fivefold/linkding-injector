@@ -54,6 +54,11 @@
       "css": ["build/searchInjection.css"],
       "js": ["build/searchInjection.js"]
     },
+{
+      "matches": ["*://*.startpage.com/*"],
+      "css": ["build/searchInjection.css"],
+      "js": ["build/searchInjection.js"]
+    },
     {
       "matches": [
         "*://*.google.com/*",
@@ -271,3 +276,4 @@
 
   "host_permissions": ["https://*/*", "http://*/*"]
 }
+
