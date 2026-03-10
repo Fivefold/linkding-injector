@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
   "name": "linkding injector",
-  "version": "1.3.6",
+  "version": "1.3.7",
   "description": "Injects search results from the linkding bookmark service into search pages like google and duckduckgo",
   "homepage_url": "https://github.com/fivefold/linkding-injector.git",
 
@@ -254,6 +254,10 @@
 
   "options_ui": {
     "page": "options/index.html"
+  },
+
+  "content_security_policy": {
+    "extension_pages": "script-src 'self'"
   },
 
   "web_accessible_resources": [

@@ -1,3 +1,7 @@
+## v1.3.7 (11/01/2026)
+- [**bug**] Fix broken http connections on firefox (see #39)
+- [**enhancement**] show error codes and messages in extension settings on connection fails
+
 ## v1.3.6 (26/10/2025)
 - [**bug**] Fix broken Kagi injection (see #33)
 - [**enhancement**] change to extension manifest v3, simplifying cross-browser development
