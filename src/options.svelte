@@ -5,6 +5,7 @@
   let baseUrl;
   let token;
   let resultNum;
+  let showLogo;
   let openLinkType;
   let themeDuckduckgo;
   let themeGoogle;
@@ -22,6 +23,7 @@
     baseUrl = config.baseUrl;
     token = config.token;
     resultNum = config.resultNum;
+    showLogo = config.showLogo;
     openLinkType = config.openLinkType;
     themeDuckduckgo = config.themeDuckduckgo;
     themeGoogle = config.themeGoogle;
@@ -38,6 +40,7 @@
       baseUrl,
       token,
       resultNum,
+      showLogo,
       openLinkType,
       themeDuckduckgo,
       themeGoogle,
@@ -148,6 +151,18 @@
           />
           <i class="form-icon" />Open links in the same tab
         </label>
+      </div>
+      <div class="form-group">
+        <label class="form-checkbox">
+          <input
+            type="checkbox"
+            bind:checked={showLogo}
+          />
+        <i class="form-icon"></i>
+        <span>Show logo</span>
+      </label>
+      <div class="form-input-hint">
+        Shows or hides the extension logo on the results title.
       </div>
       <div class="form-group p-relative clearfix">
         <div class="form-label">Theme of injection box</div>
