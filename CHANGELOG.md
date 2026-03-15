@@ -1,3 +1,6 @@
+## v1.3.8 (11/01/2026)
+- [**feature**] Add toggle to hide logo in injection box (thanks @jcorbalanm)
+
 ## v1.3.7 (11/01/2026)
 - [**bug**] Fix broken http connections on firefox (see #39)
 - [**enhancement**] show error codes and messages in extension settings on connection fails
