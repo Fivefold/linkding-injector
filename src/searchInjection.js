@@ -55,11 +55,13 @@ port.onMessage.addListener(function (m) {
   // In case we don't get results, but a message from the background script,
   // display it. This is the case before proper configuration
   if ("message" in m) {
+    const showLogo = m.config?.showLogo ?? true; // If configuration is not done yet, m.config is undefined
+
     htmlString = `
     <div id="bookmark-list-container" class="${searchEngine}">
       <div id="navbar">
         <a id="ld-logo">
-          ${m.config.showLogo ? `<img src="${browser.runtime.getURL("icons/logo.svg")}" class="setup" />` : ""}
+          ${showLogo ? `<img src="${browser.runtime.getURL("icons/logo.svg")}" class="setup" />` : ""}
           <h1>linkding injector</h1>
         </a>
         <a id="ld-options" class="openOptions">
