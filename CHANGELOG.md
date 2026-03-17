@@ -1,3 +1,6 @@
+## v1.3.10 (17/03/2026)
+- [**bug**] Fixed welcome injection box not showing for fresh installs before configuration
+
 ## v1.3.9 (15/03/2026)
 - [**bug**] Improved config loading to prevent data loss during updates
 
