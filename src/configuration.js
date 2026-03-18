@@ -14,6 +14,7 @@ const DEFAULT_CONFIG = {
   themeSearx: "auto",
   themeKagi: "auto",
   themeQwant: "auto",
+  themeStartpage: "auto",
 };
 
 export async function getConfiguration() {
