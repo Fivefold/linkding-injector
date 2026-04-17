@@ -35,14 +35,60 @@ if (document.location.hostname.match(/duckduckgo\.com/)) {
   console.debug("Linkding-Injector extension: unknown search engine.");
 }
 
-// CSS selectors for finding the sidebar to later inject into
+/**
+ * Selector for the container to inject into
+ * @typedef {Object} InjectionContainerQuery
+ * @property {function(): void | null} transformation - transformation to apply before using the selector
+ * @property {string} selector - the CSS selector to use for querying the container
+ * @property {function(): void | null} reverseTransformation - reversion of the transformation if the selector still wasn't found
+ */
+
+/**
+ * CSS selectors for finding the sidebar to later inject into
+ * @type { { [key: string]: Array.<InjectionContainerQuery> } }
+ */
 const sidebarSelectors = {
-  duckduckgo: "section[data-area=sidebar]",
-  google: "#rhs",
-  brave: "aside.sidebar",
-  searx: "#sidebar",
-  kagi: ".right-content-box > ._0_right_sidebar",
-  qwant: ".is-sidebar",
+  duckduckgo: [
+    { transformation: null, selector: "section[data-area=sidebar]", reverseTransformation: null },
+    { transformation: null, selector: "section[data-area=mainline]", reverseTransformation: null }
+  ],
+  google: [
+    { transformation: null, selector: "#rhs", reverseTransformation: null },
+    {
+      // Google completely omits the sidebar container if there is no content.
+      // We need to add it manually before injection
+      transformation: function() {
+        const sidebarContainerString = `
+        <div id="rhs" class="TQc1id hSOk2e rhstc4"></div>`;
+
+        const parser = new DOMParser();
+        const sidebarContainer = parser.parseFromString(
+          sidebarContainerString,
+          "text/html"
+        );
+        const container = document.querySelector("#rcnt");
+        container?.appendChild(sidebarContainer.body.querySelector("div"));
+      },
+      selector: "#rhs",
+      reverseTransformation: function() {
+        const element = document.querySelector("#rhs");
+        element?.parentElement.removeChild(element);
+      }
+    },
+    { transformation: null, selector: "#topstuff", reverseTransformation: null }
+  ],
+  brave: [
+    { transformation: null, selector: "aside.sidebar", reverseTransformation: null }
+  ],
+  searx: [
+    { transformation: null, selector: "#sidebar", reverseTransformation: null }
+  ],
+  kagi: [
+    { transformation: null, selector: ".right-content-box > ._0_right_sidebar", reverseTransformation: null }
+  ],
+  qwant: [
+    { transformation: null, selector: ".is-sidebar", reverseTransformation: null }
+  ],
 };
 
 // When background script answers with results, construct html for the result box
@@ -164,21 +210,22 @@ port.onMessage.addListener(function (m) {
   }
 
   // Finding the sidebar
-  const sidebarSelector = sidebarSelectors[searchEngine];
-  let sidebar = document.querySelector(sidebarSelector);
+  const sidebarSelector = sidebarSelectors[searchEngine] ?? [];
+  let sidebar = null;
 
-  // Google completely omits the sidebar container if there is no content.
-  // We need to add it manually before injection
-  if (searchEngine === "google" && sidebar === null) {
-    let sidebarContainerString = `
-    <div id="rhs" class="TQc1id hSOk2e rhstc4"></div>`;
-    let sidebarContainer = parser.parseFromString(
-      sidebarContainerString,
-      "text/html"
-    );
-    let container = document.querySelector("#rcnt");
-    container.appendChild(sidebarContainer.body.querySelector("div"));
-    sidebar = document.querySelector("#rhs");
+  for (const injectionContainerQuery of sidebarSelector) {
+    if (injectionContainerQuery.transformation !== null) {
+      injectionContainerQuery.transformation();
+    }
+    sidebar = document.querySelector(injectionContainerQuery.selector);
+
+    if (sidebar !== null && sidebar.checkVisibility()) {
+      break;
+    }
+
+    if(injectionContainerQuery.reverseTransformation !== null) {
+      injectionContainerQuery.reverseTransformation();
+    }
   }
 
   // Convert the html string into a DOM document
