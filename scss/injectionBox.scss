@@ -19,7 +19,8 @@ div#bookmark-list-container {
   }
   
   &.google { // google-specific styles
-    width: 369px;
+    min-width: 369px;
+    width: 100%;
     box-sizing: border-box;
     box-shadow: none;
 
