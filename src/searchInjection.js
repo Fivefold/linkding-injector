@@ -36,11 +36,46 @@ if (document.location.hostname.match(/duckduckgo\.com/)) {
 }
 
 /**
+ * Location of the injection
+ * @typedef {Object} InjectionLocation
+ * @property {string} className - name of the class to be applied to the injected element, based on the location
+ * @property {(element: Element, location: InjectionLocation) => void} transformation - transformation on the injected element itself
+ */
+
+/**
+ * List of the possible injection locations
+ * @type { { [key: string]: InjectionLocation } }
+ */
+const injectionLocations = {
+  sidebar: {
+    className: "location-sidebar",
+    transformation: (element, location) => {
+      element.classList.add(location.className);
+    }
+  },
+  top: {
+    className: "location-top",
+    transformation: (element, location) => {
+      element.classList.add(location.className);
+    }
+  }
+};
+
+/**
+ * @param {Element} element
+ * @param {InjectionLocation} location
+ */
+function addLocationClass(element, location) {
+  element.classList.add(location.className)
+}
+
+/**
  * Selector for the container to inject into
  * @typedef {Object} InjectionContainerQuery
- * @property {function(): void | null} transformation - transformation to apply before using the selector
+ * @property {(() => void) | null} transformation - transformation to apply before using the selector
  * @property {string} selector - the CSS selector to use for querying the container
- * @property {function(): void | null} reverseTransformation - reversion of the transformation if the selector still wasn't found
+ * @property {(() => void) | null} reverseTransformation - reversion of the transformation if the selector still wasn't found
+ * @property {InjectionLocation} location - location, where the element will be injected in
  */
 
 /**
@@ -49,15 +84,30 @@ if (document.location.hostname.match(/duckduckgo\.com/)) {
  */
 const sidebarSelectors = {
   duckduckgo: [
-    { transformation: null, selector: "section[data-area=sidebar]", reverseTransformation: null },
-    { transformation: null, selector: "section[data-area=mainline]", reverseTransformation: null }
+    {
+      transformation: null,
+      selector: "section[data-area=sidebar]",
+      reverseTransformation: null,
+      location: injectionLocations.sidebar
+    },
+    {
+      transformation: null,
+      selector: "section[data-area=mainline]",
+      reverseTransformation: null,
+      location: injectionLocations.top
+    }
   ],
   google: [
-    { transformation: null, selector: "#rhs", reverseTransformation: null },
+    {
+      transformation: null,
+      selector: "#rhs",
+      reverseTransformation: null,
+      location: injectionLocations.sidebar
+    },
     {
       // Google completely omits the sidebar container if there is no content.
       // We need to add it manually before injection
-      transformation: function() {
+      transformation: () => {
         const sidebarContainerString = `
         <div id="rhs" class="TQc1id hSOk2e rhstc4"></div>`;
 
@@ -67,27 +117,56 @@ const sidebarSelectors = {
           "text/html"
         );
         const container = document.querySelector("#rcnt");
-        container?.appendChild(sidebarContainer.body.querySelector("div"));
+        const rhsElement = sidebarContainer.body.querySelector("div#rhs");
+        if (rhsElement !== null) {
+          container?.appendChild(rhsElement);
+        }
       },
       selector: "#rhs",
-      reverseTransformation: function() {
+      reverseTransformation: () => {
         const element = document.querySelector("#rhs");
-        element?.parentElement.removeChild(element);
-      }
+        element?.parentElement?.removeChild(element);
+      },
+      location: injectionLocations.sidebar
     },
-    { transformation: null, selector: "#topstuff", reverseTransformation: null }
+    {
+      transformation: null,
+      selector: "#topstuff",
+      reverseTransformation: null,
+      location: injectionLocations.top
+    }
   ],
   brave: [
-    { transformation: null, selector: "aside.sidebar", reverseTransformation: null }
+    {
+      transformation: null,
+      selector: "aside.sidebar",
+      reverseTransformation: null,
+      location: injectionLocations.sidebar
+    }
   ],
   searx: [
-    { transformation: null, selector: "#sidebar", reverseTransformation: null }
+    {
+      transformation: null,
+      selector: "#sidebar",
+      reverseTransformation: null,
+      location: injectionLocations.sidebar
+    }
   ],
   kagi: [
-    { transformation: null, selector: ".right-content-box > ._0_right_sidebar", reverseTransformation: null }
+    {
+      transformation: null,
+      selector: ".right-content-box > ._0_right_sidebar",
+      reverseTransformation: null,
+      location: injectionLocations.sidebar
+    }
   ],
   qwant: [
-    { transformation: null, selector: ".is-sidebar", reverseTransformation: null }
+    {
+      transformation: null,
+      selector: ".is-sidebar",
+      reverseTransformation: null,
+      location: injectionLocations.sidebar
+    }
   ],
 };
 
@@ -212,14 +291,17 @@ port.onMessage.addListener(function (m) {
   // Finding the sidebar
   const sidebarSelector = sidebarSelectors[searchEngine] ?? [];
   let sidebar = null;
+  let injectionLocation = null;
 
   for (const injectionContainerQuery of sidebarSelector) {
     if (injectionContainerQuery.transformation !== null) {
       injectionContainerQuery.transformation();
     }
     sidebar = document.querySelector(injectionContainerQuery.selector);
+    const isVisible = sidebar?.checkVisibility() ?? false;
 
-    if (sidebar !== null && sidebar.checkVisibility()) {
+    if (sidebar !== null && isVisible) {
+      injectionLocation = injectionContainerQuery.location;
       break;
     }
 
@@ -232,7 +314,11 @@ port.onMessage.addListener(function (m) {
   html = parser.parseFromString(htmlString, "text/html");
   // The actual injection
   if (document.querySelector("#bookmark-list-container") == null) {
-    sidebar.prepend(html.body.querySelector("div"));
+    const injectedElement = html.body.querySelector("div#bookmark-list-container");
+    if (injectionLocation !== null && injectedElement !== null) {
+      injectionLocation.transformation(injectedElement, injectionLocation);
+      sidebar?.prepend(injectedElement);
+    }
   }
 
   // Event listeners for opening the extension options. These can only be opened
@@ -262,7 +348,8 @@ if (searchEngine == "brave") {
   // Qwant asynchronously loads the sidebar. We need to watch for when the
   // sidebar is loaded and only then start the injection
   const qwantObserver = new MutationObserver((mutations, observer) => {
-    if (document.querySelector(sidebarSelectors["qwant"])) {
+    // TODO: just using the first element of the array doesn't seem like a good idea
+    if (document.querySelector(sidebarSelectors["qwant"][0].selector)) {
       port.postMessage({ searchTerm: searchTerm });
       observer.disconnect(); // Stop observing after the element appears
     }
