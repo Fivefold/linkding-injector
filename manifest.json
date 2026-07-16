@@ -30,7 +30,7 @@
 
   "content_scripts": [
     {
-      "matches": ["*://duckduckgo.com/*"],
+      "matches": ["*://duckduckgo.com/*", "*://*.duckduckgo.com/*"],
       "css": ["build/searchInjection.css"],
       "js": ["build/searchInjection.js"]
     },
