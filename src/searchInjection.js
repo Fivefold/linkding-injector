@@ -39,7 +39,7 @@ if (document.location.hostname.match(/duckduckgo\.com/)) {
 const sidebarSelectors = {
   duckduckgo: "section[data-area=sidebar]",
   google: "#rhs",
-  brave: "aside.sidebar",
+  brave: "#infobox-snippet",
   searx: "#sidebar",
   kagi: ".right-content-box > ._0_right_sidebar",
   qwant: ".is-sidebar",
