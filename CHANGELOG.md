@@ -1,3 +1,7 @@
+## v1.3.11 (30/08/2026)
+- [**bug**] Fixed broken Brave Search support (see #49)
+- [**enhancement**] Add duckduckgo subdomains (see #29 and #34)
+
 ## v1.3.10 (17/03/2026)
 - [**bug**] Fixed welcome injection box not showing for fresh installs before configuration
 
