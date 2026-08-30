@@ -45,12 +45,12 @@ Once the extension is properly configured linkding search results will show in t
   <tr>
     <td>
       <a href="https://addons.mozilla.org/en-US/firefox/addon/linkding-injector/">
-        <img src="https://blog.mozilla.org/addons/files/2020/04/get-the-addon-fx-apr-2020.svg" alt="Get the addon from the Mozilla Addon Store" width="200" height="200">
+        <img src="https://blog.mozilla.org/addons/files/2020/04/get-the-addon-fx-apr-2020.svg" alt="Get the addon from the Mozilla Addon Store" width="200" height="70">
       </a>
     </td>
     <td>
       <a href="https://chrome.google.com/webstore/detail/linkding-injector/odjhldcomjlmfbdfeopdkeinpkmjibok">
-        <img src="https://developer.chrome.com/static/docs/webstore/branding/image/HRs9MPufa1J1h5glNhut.png" alt="Get the addon from the Chrome Web Store" width="231" height="200">
+        <img src="https://developer.chrome.com/static/docs/webstore/branding/image/HRs9MPufa1J1h5glNhut.png" alt="Get the addon from the Chrome Web Store" width="231" height="70">
       </a>
     </td>
   </tr>
